@@ -136,6 +136,8 @@ router.get('/user/:user_id', async (req, res) => {
 // @ route    DELETE api/profile
 // @desc      Delete user profile @ user @ posts
 // @access    Private -> can access req.user.id in auth
+
+//no need id in the router because the user id comes with the request
 router.delete('/', auth, async (req, res) => {
   try {
     //@todo - remove users' posts
