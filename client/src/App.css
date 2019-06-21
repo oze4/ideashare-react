@@ -1,0 +1,237 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-family: 'Arial', sans-serif;
+  font-size: 16px;
+  background-color: #f2f2f2;
+}
+
+body {
+  font-size: 1rem;
+}
+
+.container {
+  width: 1080px;
+  margin: 3rem auto;
+}
+
+a {
+  text-decoration: none;
+  color: #000;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  background-color: white;
+  color: #000;
+  padding: 1rem 3rem;
+  box-shadow: 0 6px 6px -6px #999;
+}
+
+.navbar ul {
+  display: flex;
+  list-style: none;
+}
+.navbar ul li {
+  padding: 0 1rem;
+}
+
+/* homepage */
+.main-grid {
+  display: grid;
+  grid-gap: 20px;
+  grid-template-areas: 'posts recommendation' 'posts category';
+  grid-template-columns: 10fr 4fr;
+  margin-top: 1rem;
+}
+
+.posts {
+  grid-area: posts;
+  /* an idea */
+}
+.posts .idea-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.posts .idea {
+  display: grid;
+  grid-template-columns: 2fr 9fr 2fr;
+  grid-template-areas: 'idea-user idea-content idea-likes';
+  padding: 0.5rem 1rem;
+  border: 1px solid rgba(153, 153, 153, 0.5);
+  border-collapse: collapse;
+  background-color: white;
+}
+.posts .idea .idea-content {
+  margin: 0.5rem;
+}
+.posts .idea .idea-user {
+  text-align: center;
+  padding-top: 0.5rem;
+}
+.posts .idea .idea-user .name {
+  font-size: 0.8rem;
+}
+.posts .vote-box {
+  border: 1px solid rgba(153, 153, 153, 0.5);
+  text-align: center;
+  padding: 1rem;
+}
+
+section.recommendation {
+  grid-area: recommendation;
+  padding: 2rem;
+  background-color: white;
+}
+section.recommendation li {
+  border-bottom: 1px solid rgba(153, 153, 153, 0.5);
+  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+}
+section.recommendation li i {
+  background-color: #39b54a;
+  text-align: center;
+  color: white;
+  padding-top: 0.3rem;
+  padding-bottom: 0.2rem;
+  padding: 0.1rem 1rem 0.2rem 1rem;
+  border-radius: 0.2rem;
+}
+
+section.category {
+  grid-area: category;
+  padding: 2rem;
+  border: 1px solid rgba(153, 153, 153, 0.5);
+  background-color: white;
+}
+
+.main-grid ul {
+  list-style: none;
+}
+.main-grid ul li {
+  line-height: 1.5;
+}
+
+.svg {
+  width: 1.5rem;
+}
+
+/* Post the Idea form */
+i.fa-sort-up {
+  font-size: 2rem;
+  vertical-align: middle;
+}
+
+.idea-form {
+  margin: auto;
+  padding: 5rem;
+  min-width: 700px;
+  width: 60%;
+  background-color: white;
+  /* box-shadow */
+}
+.idea-form .button {
+  font-size: 1rem;
+  padding: 0.5rem 2rem;
+  border-radius: 0.3rem;
+}
+.idea-form .green-button {
+  color: white;
+  background-color: #00bb65;
+}
+
+.idea-form input[type='text'],
+input[type='email'],
+input[type='password'],
+select,
+textarea {
+  display: block;
+  width: 100%;
+  padding: 0.6rem;
+  font-size: 1rem;
+  margin: 2rem 0;
+  border-radius: 0.3rem;
+  border: 1px solid #ccc;
+}
+
+/* Register, Login form */
+.register-form input[type='text'],
+input[type='email'],
+input[type='password'],
+select,
+textarea {
+  display: block;
+  width: 100%;
+  padding: 0.6rem;
+  font-size: 1rem;
+  margin: 2rem 0;
+  border-radius: 0.3rem;
+  border: 1px solid #ccc;
+}
+
+.bg-modal {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  opacity: 0.8;
+  position: absolute;
+  top: 0;
+  /* display: none; */
+  justify-content: center;
+  align-items: center;
+}
+.bg-modal .register-form {
+  display: grid;
+  justify-content: center;
+  margin: 0 auto;
+  padding: 5rem;
+  min-width: 500px;
+  width: 50%;
+  background-color: white;
+  position: relative;
+}
+.bg-modal .register-form .close {
+  position: absolute;
+  font-size: 3rem;
+  right: 1rem;
+  top: 0, 5rem;
+  transform: rotate(45deg);
+  cursor: pointer;
+}
+.bg-modal .register-form .button {
+  font-size: 1rem;
+  padding: 0.5rem 2rem;
+  border-radius: 0.3rem;
+}
+.bg-modal .register-form .green-button {
+  color: white;
+  width: 100%;
+  background-color: #00bb65;
+}
+.bg-modal .register-form p {
+  margin-top: 0.5rem;
+  text-align: center;
+}
+.bg-modal .register-form a {
+  color: black;
+  text-decoration: underline;
+}
+
+/* alert */
+.alert {
+  padding: 0.8rem;
+  margin: 1rem 0;
+  opacity: 0.9;
+  color: white;
+}
+
+.alert-danger {
+  background-color: #c1272d;
+}
