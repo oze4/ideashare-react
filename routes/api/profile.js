@@ -63,8 +63,16 @@ router.post(
     if (bio) profileFields.bio = bio;
     if (website) profileFields.website = website;
     if (status) profileFields.status = status;
+    // if (skills) {
+    //   profileFields.skills = skills.split(',').map(skill => skill.trim());
+    // }
+
     if (skills) {
-      profileFields.skills = skills.split(',').map(skill => skill.trim());
+      try {
+        profileFields.skills = skills.split(',').map(skill => skill.trim());
+      } catch (err) {
+        profileFields.skills = skills;
+      }
     }
 
     //Build social array, have to initialize social first
