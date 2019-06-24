@@ -148,7 +148,7 @@ router.get('/user/:user_id', async (req, res) => {
 //no need id in the router because the user id comes with the request
 router.delete('/', auth, async (req, res) => {
   try {
-    //@todo - remove users' posts
+    //@todo - remove users' posts, not do actually
 
     //Remove profile
     await Profile.findOneAndRemove({ user: req.user.id });
