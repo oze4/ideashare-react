@@ -15,7 +15,7 @@ const ProfileAbout = ({
       {bio && (
         <Fragment>
           <h2 class='text-primary'>
-            {firstName[firstName.length - 1] == 's'
+            {firstName[firstName.length - 1] === 's'
               ? `${firstName}'`
               : `${firstName}'s`}{' '}
             Bio
