@@ -45,7 +45,7 @@ const Login = ({ login, isAuthenticated }) => {
           <div className='form-group'>
             <input
               name='password'
-              type='text'
+              type='password'
               placeholder='Password'
               minLength='6'
               value={password}

@@ -9,7 +9,7 @@ const PostForm = ({ addPost }) => {
     body: ''
   });
   return (
-    <div>
+    <div className='post-form'>
       <div className='bg-primary p'>
         <h3>Say Something...</h3>
       </div>
