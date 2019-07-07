@@ -33,11 +33,11 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
   return (
     <Fragment>
       <div className='register-form'>
-        <div className='close'>+</div>
-        <h1>Create your account</h1>
+        <h1 className='large bold'>Create your account</h1>
 
         <form className='form' onSubmit={e => onSubmit(e)}>
           <div className='form-group'>
+            <p>Name</p>
             <input
               name='name'
               type='text'
@@ -49,6 +49,7 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
           </div>
 
           <div className='form-group'>
+            <p>E-mail</p>
             <input
               name='email'
               type='email'
@@ -59,6 +60,7 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
           </div>
 
           <div className='form-group'>
+            <p>Password</p>
             <input
               name='password'
               type='text'
@@ -70,6 +72,7 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
           </div>
 
           <div className='form-group'>
+            <p class='confirm'>Confirm password</p>
             <input
               name='password2'
               type='text'
@@ -82,12 +85,17 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
           <input
             type='submit'
             value='Create account'
-            className='button green-button'
+            className='btn btn-action'
           />
         </form>
 
         <p>
           Already have an account? <Link to='/login'>Sign in</Link>
+        </p>
+
+        <p className='small'>
+          By signing up, you agree to the <Link>Terms of Service</Link> and{' '}
+          <Link>Privacy Policy</Link>
         </p>
       </div>
     </Fragment>

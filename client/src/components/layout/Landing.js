@@ -7,7 +7,24 @@ const Landing = ({ isAuthenticated }) => {
   if (isAuthenticated) {
     return <Redirect to='/dashboard' />;
   }
-  return <div>hello </div>;
+  return (
+    <div className='landing'>
+      <div className='dark-overlay'>
+        <div className='landing-inner'>
+          <h1 className='x-large'>Welcome to IDEAshare</h1>
+          <p className='lead'>Share your ideas and problem with the world</p>
+          <div className='buttons'>
+            <Link to='/register' className='btn btn-action'>
+              Sign up
+            </Link>
+            <Link to='/login' className='btn'>
+              Log in
+            </Link>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 };
 
 Landing.propTypes = {

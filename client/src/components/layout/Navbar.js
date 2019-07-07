@@ -13,9 +13,9 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
           <span className='hide-sm'>Log out</span>
         </a>
       </li>
-      <li>
+      {/* <li>
         <Link to='/profiles'>Ideators</Link>
-      </li>
+      </li> */}
 
       <li>
         <Link to='/posts'>Posts</Link>
@@ -32,9 +32,9 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
 
   const guestLinks = (
     <ul>
-      <li>
+      {/* <li>
         <Link to='/profiles'>Ideators</Link>
-      </li>
+      </li> */}
 
       <li>
         <Link to='/posts'>Posts</Link>
@@ -49,7 +49,7 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
     </ul>
   );
   return (
-    <nav className='navbar bg-dark'>
+    <nav className='navbar bg-primary'>
       <h1>
         <Link to='/posts'>IDEA share</Link>
       </h1>

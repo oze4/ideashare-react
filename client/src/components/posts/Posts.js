@@ -3,27 +3,29 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Spinner from '../layout/Spinner';
 import PostItem from './PostItem';
+import PostForm from './PostForm';
+import Profiles from '../profiles/Profiles';
 import { getPosts } from '../../actions/post';
 const Posts = ({ getPosts, post: { posts, loading } }) => {
   useEffect(() => {
     getPosts();
   }, [getPosts]);
   return loading ? (
-    <Spinner />
+    <Spinner className='container' />
   ) : (
-    <Fragment>
-      <h1 className='large text-primary'>Posts</h1>
-      <p className='lead'>
-        <i className='fas fa-user'>Welcome to the community</i>
-      </p>
-
-      {/* post form */}
-      <div className='posts'>
-        {posts.map(post => (
-          <PostItem key={post._id} post={post} />
-        ))}
+    <div className='main-grid'>
+      <div className='posts-grid'>
+        <h1 className='large text-primary'>Ideas</h1>
+        <div className='posts'>
+          {/* <PostForm /> */}
+          {posts.map(post => (
+            <PostItem key={post._id} post={post} />
+          ))}
+        </div>
       </div>
-    </Fragment>
+
+      <Profiles />
+    </div>
   );
 };
 

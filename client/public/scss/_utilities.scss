@@ -1,0 +1,136 @@
+// Container
+.container {
+  max-width: $max-width;
+  margin: auto;
+  margin-bottom: 3rem;
+  overflow: hidden;
+  padding: 0 2rem;
+  position: relative;
+  top: 4rem;
+}
+//Text Styles
+.x-large {
+  font-size: 3rem;
+  line-height: 1.2;
+  margin-bottom: 1rem;
+}
+
+.text-primary {
+  color: $primary-color;
+}
+
+.text-dark {
+  color: $dark-color;
+}
+
+.text-light {
+  color: $light-color;
+}
+
+.large {
+  font-size: 2rem;
+  line-height: 1.2;
+  margin-bottom: 1rem;
+}
+.lead {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+.bold {
+  font-weight: 700;
+}
+.small {
+  font-size: 0.8rem;
+}
+//Backgrounds
+.bg {
+  &-primary {
+    @include set-background($primary-color);
+  }
+  &-light {
+    @include set-background($light-color);
+    border: solid 1px $light-color;
+  }
+  &-dark {
+    @include set-background($dark-color);
+  }
+  &-success {
+    @include set-background($success-color);
+  }
+  &-danger {
+    @include set-background($danger-color);
+  }
+  &-action {
+    @include set-background($action-color);
+  }
+  &-white {
+    @include set-background(#fff);
+    border: solid 1px $light-color;
+  }
+}
+
+// Buttons
+.btn {
+  display: inline-block;
+  background: $light-color;
+  color: #333;
+  padding: 0.5rem 2rem;
+  border-radius: 0.3rem;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  margin-right: 1rem;
+  outline: none;
+  transition: all 0.2s ease-in;
+  &.btn-primary {
+    @include set-background($primary-color);
+    &:hover {
+      background: lighten($primary-color, 5%);
+    }
+  }
+  &.btn-action {
+    @include set-background($action-color);
+    &:hover {
+      background: lighten($action-color, 5%);
+    }
+  }
+
+  &.btn-dark {
+    @include set-background($dark-color);
+    &:hover {
+      background: lighten($dark-color, 5%);
+    }
+  }
+
+  &.btn-danger {
+    @include set-background($danger-color);
+    &:hover {
+      background: lighten($danger-color, 5%);
+    }
+  }
+
+  &.btn-light {
+    @include set-background($light-color);
+    &:hover {
+      background: lighten($light-color, 5%);
+    }
+  }
+  &.btn-success {
+    @include set-background($success-color);
+    &:hover {
+      background: lighten($success-color, 5%);
+    }
+  }
+  &:hover {
+    background: lighten($dark-color, 60%);
+  }
+}
+
+.dark-overlay {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+}

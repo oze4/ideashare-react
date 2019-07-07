@@ -28,11 +28,11 @@ const Login = ({ login, isAuthenticated }) => {
   return (
     <Fragment>
       <div className='register-form'>
-        <div className='close'>+</div>
-        <h1>Sign into your account</h1>
-
+        {/* <div className='close'>+</div> */}
+        <h1 className='large bold'>Sign in to your account</h1>
         <form className='form' onSubmit={e => onSubmit(e)}>
           <div className='form-group'>
+            <p>E-mail</p>
             <input
               name='email'
               type='email'
@@ -43,6 +43,7 @@ const Login = ({ login, isAuthenticated }) => {
           </div>
 
           <div className='form-group'>
+            <p>Password</p>
             <input
               name='password'
               type='password'
@@ -52,11 +53,7 @@ const Login = ({ login, isAuthenticated }) => {
               onChange={e => onChange(e)}
             />
           </div>
-          <input
-            type='submit'
-            value='Sign in'
-            className='button green-button'
-          />
+          <input type='submit' value='Sign in' className='btn btn-action' />
         </form>
 
         <p>

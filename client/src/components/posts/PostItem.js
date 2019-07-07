@@ -11,16 +11,16 @@ const PostItem = ({
   auth,
   post: { _id, title, name, avatar, user, likes, comments, date }
 }) => (
-  <div className='post bg-white p-1 my-1'>
+  <div className='postItem bg-white p-1 my-1'>
     <div>
       <Link to={`/profile/${user}`}>
-        <img className='round-img' src={avatar} alt='' />
-        <h4> {name}</h4>
+        <img className='round-img' src={avatar} alt={`avatar${name}`} />
+        <p>{name}</p>
       </Link>
     </div>
     <div>
-      <p className='my-1'>{title}</p>
-      <p className='post-date'>
+      <p className='my-1 lead'>{title}</p>
+      <p className='post-date small'>
         Posted on <Moment format='YYY/MM/DD'>{date}</Moment>
       </p>
       <button
