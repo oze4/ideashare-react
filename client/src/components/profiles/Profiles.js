@@ -11,7 +11,7 @@ const Profiles = ({ getProfiles, profile: { profiles, loading } }) => {
   }, [getProfiles]);
   return (
     <Fragment>
-      {loading ? (
+      {loading || profiles === null ? (
         <Spinner />
       ) : (
         <div className='profiles-grid'>

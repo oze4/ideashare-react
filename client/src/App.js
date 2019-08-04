@@ -12,6 +12,7 @@ import Profiles from './components/profiles/Profiles';
 import Profile from './components/profile/Profile';
 import Posts from './components/posts/Posts';
 import Post from './components/post/Post';
+import PostForm from './components/posts/PostForm';
 import PrivateRoute from './components/routing/PrivateRoute';
 
 // Redux
@@ -48,6 +49,7 @@ const App = () => {
               <Route exact path='/profile/:id' component={Profile} />
               <Route exact path='/posts' component={Posts} />
               <Route exact path='/posts/:id' component={Post} />
+              <Route exact path='/post-form' component={PostForm} />
               <PrivateRoute exact path='/dashboard' component={Dashboard} />
               <PrivateRoute
                 exact

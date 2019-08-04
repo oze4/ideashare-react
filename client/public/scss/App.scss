@@ -25,7 +25,7 @@ a {
 
 .flex {
   display: flex;
-  flex-direction: row;
+  flex-wrap: wrap;
 }
 // Navbar
 .navbar {
@@ -74,7 +74,7 @@ a {
 .main-grid {
   display: grid;
   grid-gap: 20px;
-  grid-template-areas: 'posts profiles-grid' 'posts category-side';
+  grid-template-areas: 'posts users-grid' 'posts category-side';
   grid-template-columns: 10fr 4fr;
   margin-top: 1rem;
 }
@@ -92,6 +92,33 @@ a {
       padding: 0.5rem 1rem;
       //   border-collapse: collapse;
       background-color: white;
+      .left {
+        grid-area: idea-user;
+      }
+      .middle {
+        grid-area: idea-content;
+        .border-btn {
+          border: 0.5px solid $light-grey;
+          padding: 0.2rem 0.5rem;
+          margin: 1rem;
+          border-radius: 0.4rem;
+          .fa-comments {
+            color: $grey-color;
+            font-size: 0.8rem;
+          }
+          .comment-count {
+            font-size: 0.8rem;
+          }
+        }
+      }
+      .right {
+        grid-area: idea-likes;
+        .grey-border {
+          background-color: transparent;
+          color: #333;
+          border: 0.5px solid $light-grey;
+        }
+      }
       .post-content {
         margin: 0.5rem;
       }
@@ -111,39 +138,25 @@ a {
   }
 }
 
-.profiles-grid {
-  grid-area: profiles-grid;
-  li {
-    border-bottom: 1px solid rgba(153, 153, 153, 0.5);
-    padding: 0.5rem;
-    display: flex;
-    align-items: center;
-    i {
-      background-color: #39b54a;
-      text-align: center;
-      color: white;
-      padding-top: 0.3rem;
-      padding-bottom: 0.2rem;
-      padding: 0.1rem 1rem 0.2rem 1rem;
-      border-radius: 0.2rem;
-    }
-  }
-
-  .profiles {
+.users-grid {
+  grid-area: users-grid;
+  .users {
     background-color: #fff;
-    padding: 1.5rem;
-    .profile-avatar {
+    padding: 1.4rem;
+
+    .user-avatar {
       width: 3rem;
       border-radius: 50%;
       margin: 0.2rem;
     }
   }
-  hr {
-    background-color: $dark-color;
-    position: relative;
-    width: 18rem;
-    margin: 0 auto;
-  }
+}
+
+hr {
+  background-color: $dark-color;
+  position: relative;
+  width: 18rem;
+  margin: 0 auto;
 }
 
 section.category {
@@ -239,11 +252,13 @@ textarea {
     color: black;
     text-decoration: underline;
   }
+
   .btn {
     margin: 2rem auto 2rem;
     width: 80%;
     font-size: 1.2rem;
   }
+
   p {
     line-height: 2rem;
   }
@@ -270,4 +285,29 @@ textarea {
     width: 100%;
     margin: auto;
   }
+}
+
+// Alert
+
+.alert {
+  width: 100%;
+  margin: 0.2rem auto;
+  background-color: transparent;
+  padding: 0.2rem;
+  color: #333;
+  border-radius: 0.5rem;
+  text-align: center;
+}
+.alert-primary {
+  color: $primary-color;
+  border: 1px solid $danger-color;
+}
+.alert-danger {
+  color: $danger-color;
+  border: 1px solid $danger-color;
+}
+
+.alert-success {
+  color: $success-color;
+  border: 1px solid $success-color;
 }

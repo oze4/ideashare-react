@@ -28,7 +28,7 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
   };
 
   if (isAuthenticated) {
-    return <Redirect to='/dashboard' />;
+    return <Redirect to='/posts' />;
   }
   return (
     <Fragment>
@@ -63,7 +63,7 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
             <p>Password</p>
             <input
               name='password'
-              type='text'
+              type='password'
               placeholder='Password'
               minLength='6'
               value={password}
@@ -75,7 +75,7 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
             <p class='confirm'>Confirm password</p>
             <input
               name='password2'
-              type='text'
+              type='password'
               placeholder='Confirm Password'
               minLength='6'
               value={password2}
