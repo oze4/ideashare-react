@@ -11,26 +11,27 @@ const CommentItem = ({
   auth,
   deleteComment
 }) => (
-  <div class='post bg-white p-1 my-1'>
+  <div className='comment-item'>
     <div>
-      <Link to={`/profile/${user}`}>
-        <img class='round-img' src={avatar} alt='' />
-        <h4>{name}</h4>
+      <Link className='user' to={`/profile/${user}`}>
+        <img className='avatar' src={avatar} alt='' />
+        <h4 className='user-name'>{name}</h4>
       </Link>
     </div>
     <div>
-      <p class='my-1'>{text}</p>
-      <p class='post-date'>
+      <p className='comment-content'>{text}</p>
+      <p class='comment-date'>
         <Moment format='YYYY/MM/DD'>{date}</Moment>
       </p>
 
-      {!auth.loading && user === auth.user._id && (
+      {!auth.loading && auth.isAuthenticated && user === auth.user._id && (
         <button
           onClick={e => deleteComment(postId, _id)}
           type='button'
-          className='btn btn-danger'
+          className='remove-comment'
         >
-          <i className='fas fa-times' />
+          Delete
+          {/* <i className='fas fa-times' /> */}
         </button>
       )}
     </div>

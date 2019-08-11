@@ -8,7 +8,8 @@ import {
   GET_POST,
   UPDATE_LIKES,
   ADD_COMMENT,
-  REMOVE_COMMENT
+  REMOVE_COMMENT,
+  UPDATE_STATUS
 } from './types';
 
 //Get posts
@@ -34,7 +35,6 @@ export const getPosts = () => async dispatch => {
 export const getPost = id => async dispatch => {
   try {
     const res = await axios.get(`/api/posts/${id}`);
-    console.log(res);
     dispatch({
       type: GET_POST,
       payload: res.data
@@ -42,7 +42,7 @@ export const getPost = id => async dispatch => {
   } catch (err) {
     dispatch({
       type: POST_ERROR,
-      payload: { msg: err.response.statusText, status: err.response.status }
+      payload: { msg: err.res.statusText, status: err.res.status }
     });
   }
 };
@@ -57,6 +57,8 @@ export const toggleLike = id => async dispatch => {
       payload: { id, likes: res.data }
     });
   } catch (err) {
+    dispatch(setAlert('Please login to vote', 'danger'));
+
     dispatch({
       type: POST_ERROR,
       payload: { msg: err.response.statusText, status: err.response.status }
@@ -175,8 +177,26 @@ export const deleteComment = (postId, commentId) => async dispatch => {
       payload: commentId
     });
 
-    dispatch(setAlert('Post Removed', 'success'));
+    dispatch(setAlert('Comment Removed', 'success'));
   } catch (err) {
+    dispatch({
+      type: POST_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status }
+    });
+  }
+};
+
+// update status of the post
+export const toggleStatus = id => async dispatch => {
+  try {
+    const res = await axios.put(`/api/posts/status/${id}`);
+
+    dispatch({
+      type: UPDATE_STATUS,
+      payload: { id, status: res.data }
+    });
+  } catch (err) {
+    dispatch(setAlert('You are not authorized', 'danger'));
     dispatch({
       type: POST_ERROR,
       payload: { msg: err.response.statusText, status: err.response.status }

@@ -6,22 +6,24 @@ import { logout } from '../../actions/auth';
 const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
   const authLinks = (
     <ul>
+      {/* <li>
+        <Link to='/profiles'>Ideators</Link>
+      </li> */}
+
+      {/* <li>
+        <Link to='/posts'>Posts</Link>
+      </li> */}
+
       <li>
-        <a onClick={logout} href='!#'>
+        <a onClick={logout} href='/posts'>
           <i className='fas fa-sign-out-alt' />
           {'  '}
           <span className='hide-sm'>Log out</span>
         </a>
       </li>
-      {/* <li>
-        <Link to='/profiles'>Ideators</Link>
-      </li> */}
-
       <li>
-        <Link to='/posts'>Posts</Link>
+        <Link to='/post-form'>+</Link>
       </li>
-
-      <Link to='/post-form'>+</Link>
 
       <li>
         <Link to='/dashboard'>
@@ -37,10 +39,13 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
       {/* <li>
         <Link to='/profiles'>Ideators</Link>
       </li> */}
-      <Link to='/login'>+</Link>
       {/* <li>
         <Link to='/posts'>Posts</Link>
       </li> */}
+
+      <li>
+        <Link to='/login'>+</Link>
+      </li>
 
       <Link to='/register'>
         <li>Sign up</li>

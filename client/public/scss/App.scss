@@ -20,7 +20,6 @@ body {
 
 a {
   text-decoration: none;
-  color: $primary-color;
 }
 
 .flex {
@@ -85,15 +84,39 @@ a {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    .postItem {
+    .post-item {
       display: grid;
       grid-template-columns: 2fr 9fr 2fr;
       grid-template-areas: 'idea-user idea-content idea-likes';
       padding: 0.5rem 1rem;
+      border: 1px solid #e8e8e8;
+      &:hover {
+        background-color: lighten($light-color, 5%);
+        cursor: pointer;
+      }
+
       //   border-collapse: collapse;
       background-color: white;
       .left {
         grid-area: idea-user;
+        .status {
+          font-size: 2rem;
+          border: none;
+          background-color: transparent;
+          .red {
+            color: $danger-color;
+          }
+          .green {
+            color: $success-color;
+          }
+          .yellow {
+            color: #ffcc33;
+          }
+        }
+
+        img {
+          width: 2.5rem;
+        }
       }
       .middle {
         grid-area: idea-content;
@@ -102,6 +125,9 @@ a {
           padding: 0.2rem 0.5rem;
           margin: 1rem;
           border-radius: 0.4rem;
+          &:hover {
+            background-color: $light-color;
+          }
           .fa-comments {
             color: $grey-color;
             font-size: 0.8rem;
@@ -113,10 +139,20 @@ a {
       }
       .right {
         grid-area: idea-likes;
-        .grey-border {
+        .toggle-like {
           background-color: transparent;
           color: #333;
           border: 0.5px solid $light-grey;
+          &:hover {
+            color: $primary-color;
+            border: 0.5px solid $primary-color;
+          }
+        }
+
+        .primary-border {
+          background-color: transparent;
+          color: $primary-color;
+          border: 0.5px solid $primary-color;
         }
       }
       .post-content {
@@ -138,6 +174,62 @@ a {
   }
 }
 
+// comments
+.discussion-section {
+  background-color: white;
+  width: 70%;
+  .comment-form {
+    margin: 1rem 2rem;
+    .form {
+      display: flex;
+      align-items: center;
+      .avatar {
+        width: 2.5rem;
+        border-radius: 2rem;
+      }
+    }
+
+    textarea {
+      width: 100%;
+      width: 600px;
+      padding: 0.6rem;
+      font-size: 1rem;
+      margin: 1rem;
+      border-radius: 0.3rem;
+      border: 1px solid #ccc;
+    }
+  }
+
+  .comment-item {
+    margin: 2rem;
+    position: relative;
+    .user {
+      display: flex;
+      padding: 1 rem;
+      .avatar {
+        width: 2.5rem;
+        border-radius: 2rem;
+      }
+      .user-name {
+        margin: 0.3rem 2rem;
+        color: $grey-color;
+      }
+    }
+    .comment-content {
+      margin: 0 4rem;
+    }
+    .comment-date {
+      margin: 0 4rem;
+      font-size: 0.8rem;
+    }
+  }
+  .remove-comment {
+    position: absolute;
+    top: 0rem;
+    right: 2rem;
+    color: $danger-color;
+  }
+}
 .users-grid {
   grid-area: users-grid;
   .users {
@@ -183,59 +275,124 @@ i.fa-sort-up {
   vertical-align: middle;
 }
 
-.idea-form {
-  margin: auto;
-  padding: 5rem;
-  min-width: 700px;
-  width: 60%;
+// .idea-form {
+//   margin: auto;
+//   padding: 5rem;
+//   min-width: 700px;
+//   width: 60%;
+//   background-color: white;
+//   .button {
+//     font-size: 1rem;
+//     padding: 0.5rem 2rem;
+//     border-radius: 0.3rem;
+//   }
+//   .green-button {
+//     color: white;
+//     background-color: #00bb65;
+//   }
+// }
+
+// Post Page
+.post {
   background-color: white;
-  .button {
-    font-size: 1rem;
-    padding: 0.5rem 2rem;
-    border-radius: 0.3rem;
+  margin: 0 auto 2rem;
+  padding: 2rem;
+  display: grid;
+  grid-template-areas: 'left right';
+  grid-template-columns: 8fr 2fr;
+  box-shadow: 2px 2px 4px -4px $grey-color;
+  .left {
+    grid-area: left;
+    .user {
+      display: flex;
+      padding: 1 rem;
+      .avatar {
+        width: 2.5rem;
+        border-radius: 2rem;
+      }
+      .user-name {
+        margin: 0.3rem 2rem;
+        color: $grey-color;
+      }
+    }
+    .post-content {
+      margin: 0 6rem;
+      .post-body {
+        font-family: 'Lora', serif;
+        font-weight: 500;
+        margin: 1rem 0;
+        font-size: 1.2rem;
+      }
+    }
   }
-  .green-button {
-    color: white;
-    background-color: #00bb65;
+  .right {
+    grid-area: right;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .toggle-like {
+      background-color: transparent;
+      color: #333;
+      border: 0.5px solid $light-grey;
+
+      &:hover {
+        color: $primary-color;
+        border: 0.5px solid $primary-color;
+      }
+    }
+
+    .primary-border {
+      background-color: transparent;
+      color: $primary-color;
+      border: 0.5px solid $primary-color;
+    }
   }
 }
 
-.idea-form input[type='text'],
-input[type='email'],
-input[type='password'],
-select,
-textarea {
-  display: block;
-  width: 100%;
-  padding: 0.6rem;
-  font-size: 1rem;
-  margin: 2rem 0;
-  border-radius: 0.3rem;
-  border: 1px solid #ccc;
-}
-
-/* Register, Login form */
-.register-form input[type='text'],
-input[type='email'],
-input[type='password'],
-select,
-textarea {
-  width: 100%;
-  max-width: 400px;
-  padding: 0.6rem;
-  font-size: 1rem;
-  margin: 2rem 0;
-  border-radius: 0.3rem;
-  border: 1px solid #ccc;
-}
-
-.register-form {
-  margin: 0 auto;
-  text-align: center;
-  padding: 3rem;
-  min-width: 500px;
+.post-form {
+  background-color: #fff;
   width: 60%;
-  position: relative;
+  margin: 1rem auto;
+  box-shadow: 4px 4px 6px -6px $grey-color;
+
+  h3 {
+    color: $primary-color;
+    padding: 2rem;
+  }
+  form {
+    textarea {
+      display: block;
+      margin: 1rem auto;
+      font-size: 1rem;
+      width: 90%;
+      min-width: 400px;
+      padding: 0.6rem;
+      border-radius: 0.3rem;
+      border: 1px solid $light-color;
+    }
+  }
+}
+// Register, Login form
+.register-form {
+  margin: 1rem auto;
+  background-color: white;
+  box-shadow: 4px 4px 6px -6px $grey-color;
+  padding: 3rem;
+  width: 60%;
+  text-align: center;
+  input[type='text'],
+  input[type='email'],
+  input[type='password'],
+  textarea {
+    width: 100%;
+    max-width: 400px;
+    padding: 0.6rem;
+    font-size: 1rem;
+    margin: 2rem 0;
+    border-radius: 0.3rem;
+    border: 1px solid #ccc;
+  }
+
   .form-group {
     display: flex;
     align-items: center;
@@ -262,19 +419,19 @@ textarea {
   p {
     line-height: 2rem;
   }
+
+  textarea {
+    width: 100%;
+    max-width: 400px;
+    padding: 0.6rem;
+    font-size: 1rem;
+    margin: 2rem 0;
+    border-radius: 0.3rem;
+    border: 1px solid #ccc;
+  }
 }
 
 /* alert */
-.alert {
-  padding: 0.8rem;
-  margin: 1rem 0;
-  opacity: 0.9;
-  color: white;
-}
-
-.alert-danger {
-  background-color: #c1272d;
-}
 
 // Spinner
 .container-xy {
@@ -289,25 +446,39 @@ textarea {
 
 // Alert
 
-.alert {
+.alert-container {
+  position: fixed;
   width: 100%;
-  margin: 0.2rem auto;
+  z-index: 10;
+  top: 5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+.alert {
+  width: 20rem;
+  opacity: 0.7;
+  margin: 0.2rem 2rem;
   background-color: transparent;
   padding: 0.2rem;
-  color: #333;
+  color: #fff;
   border-radius: 0.5rem;
   text-align: center;
 }
+
 .alert-primary {
-  color: $primary-color;
-  border: 1px solid $danger-color;
+  color: #fff;
+  background-color: $primary-color;
+  // border: 1px solid $danger-color;
 }
 .alert-danger {
-  color: $danger-color;
-  border: 1px solid $danger-color;
+  color: #fff;
+  background-color: $danger-color;
+  // border: 1px solid $danger-color;
 }
 
 .alert-success {
-  color: $success-color;
-  border: 1px solid $success-color;
+  color: #fff;
+  background-color: $success-color;
+  // border: 1px solid $success-color;
 }

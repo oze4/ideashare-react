@@ -34,7 +34,7 @@ router.post(
         title: req.body.title,
         body: req.body.body,
         name: user.name,
-        avatar: user.id,
+        avatar: user.avatar,
         user: req.user.id
       });
       const post = await newPost.save();
@@ -214,7 +214,7 @@ router.post(
       const newComment = {
         text: req.body.text,
         name: user.name,
-        avatar: user.id,
+        avatar: user.avatar,
         user: req.user.id
       };
 
@@ -262,4 +262,31 @@ router.delete('/comment/:id/:comment_id', auth, async (req, res) => {
     res.status(500).send('Server Error');
   }
 });
+
+// update the status of the post
+// only the post owner can do it
+router.put('/status/:id', auth, async (req, res) => {
+  try {
+    const post = await Post.findById(req.params.id);
+
+    if (post.user.toString() !== req.user.id) {
+      return res.status(401).json({ msg: 'User not authorized' });
+    }
+
+    if (post.status === 'red') {
+      post.status = 'yellow';
+    } else if (post.status === 'yellow') {
+      post.status = 'green';
+    } else {
+      post.status = 'red';
+    }
+    await post.save();
+
+    res.json(post.status);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
+});
+
 module.exports = router;

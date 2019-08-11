@@ -3,17 +3,13 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { addComment } from '../../actions/post';
 
-const CommentForm = ({ postId, addComment }) => {
+const CommentForm = ({ auth, postId, addComment }) => {
   const [text, setText] = useState('');
 
   return (
-    <div className='post-form'>
-      <div className='bg-primary p'>
-        <h3>Leave a Comment</h3>
-      </div>
-
+    <div className='comment-form'>
       <form
-        className='form my-1'
+        className='form'
         onSubmit={e => {
           e.preventDefault();
           //   text is object
@@ -21,16 +17,18 @@ const CommentForm = ({ postId, addComment }) => {
           setText('');
         }}
       >
+        {!auth.loading && auth.isAuthenticated && (
+          <img className='avatar' src={auth.user.avatar} alt='user-avatar' />
+        )}
+
         <textarea
           name='title'
-          cols='30'
-          rows='5'
+          rows='1'
           placeholder='What do you think?'
           value={text}
           onChange={e => setText(e.target.value)}
           required
         />
-
         <input type='submit' className='btn btn-dark my-1' value='Submit' />
       </form>
     </div>
@@ -41,7 +39,11 @@ CommentForm.propTypes = {
   addComment: PropTypes.func.isRequired
 };
 
+const mapStateToProps = state => ({
+  auth: state.auth
+});
+
 export default connect(
-  null,
+  mapStateToProps,
   { addComment }
 )(CommentForm);

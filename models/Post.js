@@ -42,7 +42,7 @@ const PostSchema = new Schema({
         type: String
       },
       avatar: {
-        type: 'String'
+        type: String
       },
       date: {
         type: Date,
@@ -53,6 +53,10 @@ const PostSchema = new Schema({
   date: {
     type: Date,
     default: Date.now
+  },
+  status: {
+    type: String,
+    default: 'red'
   }
 });
 

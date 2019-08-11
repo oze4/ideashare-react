@@ -10,12 +10,8 @@ const PostForm = ({ addPost }) => {
   });
   return (
     <div className='post-form'>
-      <div className='bg-primary p'>
-        <h3>Say Something...</h3>
-      </div>
-
+      <h3>Share you idea</h3>
       <form
-        className='form my-1'
         onSubmit={e => {
           e.preventDefault();
           addPost(formData);
@@ -24,8 +20,7 @@ const PostForm = ({ addPost }) => {
       >
         <textarea
           name='title'
-          cols='30'
-          rows='5'
+          rows='3'
           placeholder='What is the idea, problem you have?'
           value={formData.title}
           onChange={e => setFormData({ ...formData, title: e.target.value })}
@@ -34,7 +29,6 @@ const PostForm = ({ addPost }) => {
 
         <textarea
           name='body'
-          cols='30'
           rows='5'
           placeholder='Tell us more how you come up with that, what is the background'
           value={formData.body}
@@ -42,7 +36,7 @@ const PostForm = ({ addPost }) => {
           required
         />
 
-        <input type='submit' className='btn btn-dark my-1' value='Submit' />
+        <input type='submit' className='btn btn-primary m-2' value='Submit' />
       </form>
     </div>
   );
