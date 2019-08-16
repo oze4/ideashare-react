@@ -3,7 +3,7 @@ const connectDB = require('./config/db');
 const app = express();
 connectDB();
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 80;
 
 // for auto reload
 // const http = require('http');
