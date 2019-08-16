@@ -13,11 +13,11 @@ const PostItem = ({
 }) => {
   let xxx;
   if (status === 'red') {
-    xxx = <i class='fas fa-times red' />;
+    xxx = <i className='fas fa-times red' />;
   } else if (status === 'yellow') {
-    xxx = <i class='fas fa-spinner yellow' />;
+    xxx = <i className='fas fa-spinner yellow' />;
   } else {
-    xxx = <i class='fas fa-check green' />;
+    xxx = <i className='fas fa-check green' />;
   }
   return (
     <div className='post-item'>
@@ -38,7 +38,7 @@ const PostItem = ({
 
         <span className='border-btn'>
           <Link to={`posts/${_id}`}>
-            <i class='fas fa-comments' />{' '}
+            <i className='fas fa-comments' />{' '}
             <span className='comment-count'>
               {comments.length > 0 ? comments.length : 0}
             </span>
