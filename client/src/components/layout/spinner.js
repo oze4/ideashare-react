@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import spinner from './spinner.gif';
 
 export default () => (
@@ -9,6 +9,7 @@ export default () => (
         style={{ width: '200px', margin: 'auto', display: 'block' }}
         alt='Landing...'
       />
+      <h1>loading...</h1>
     </div>
   </div>
 );
