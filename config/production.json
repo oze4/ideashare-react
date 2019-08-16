@@ -1,0 +1,4 @@
+{
+  "mongoURI": "mongodb+srv://kittishane:chain123@ideashare-52yda.mongodb.net/test?retryWrites=true&w=majority",
+  "jwtSecret": "iamalwaysangry"
+}

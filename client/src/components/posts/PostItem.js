@@ -44,7 +44,7 @@ const PostItem = ({
             </span>
           </Link>
         </span>
-        {!auth.loading &&
+        {/* {!auth.loading &&
           auth.isAuthenticated &&
           auth.user &&
           user === auth.user._id && (
@@ -55,7 +55,7 @@ const PostItem = ({
             >
               <i className='fas fa-times' />
             </button>
-          )}
+          )} */}
       </div>
 
       <div className='right'>

@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
+import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { addPost } from '../../actions/post';
 
-const PostForm = ({ addPost }) => {
+const PostForm = ({ post: { post }, addPost, alert }) => {
   const [formData, setFormData] = useState({
     title: '',
     body: ''
@@ -26,7 +27,6 @@ const PostForm = ({ addPost }) => {
           onChange={e => setFormData({ ...formData, title: e.target.value })}
           required
         />
-
         <textarea
           name='body'
           rows='5'
@@ -35,9 +35,14 @@ const PostForm = ({ addPost }) => {
           onChange={e => setFormData({ ...formData, body: e.target.value })}
           required
         />
-
         <input type='submit' className='btn btn-primary m-2' value='Submit' />
       </form>
+
+      {alert.length > 0 &&
+        alert[0].msg === 'Post Created' &&
+        alert[0].alertType === 'success' && (
+          <Redirect to={`/posts/${alert[0].id}`} />
+        )}
     </div>
   );
 };
@@ -46,8 +51,12 @@ PostForm.propTypes = {
   addPost: PropTypes.func.isRequired
 };
 
+const mapStateToProps = state => ({
+  post: state.post,
+  alert: state.alert
+});
 // null because no need state from redux
 export default connect(
-  null,
+  mapStateToProps,
   { addPost }
 )(PostForm);

@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { setAlert } from './alert';
+
 import {
   GET_POSTS,
   POST_ERROR,
@@ -42,7 +43,7 @@ export const getPost = id => async dispatch => {
   } catch (err) {
     dispatch({
       type: POST_ERROR,
-      payload: { msg: err.res.statusText, status: err.res.status }
+      payload: { msg: err.message, status: err.name }
     });
   }
 };
@@ -103,14 +104,19 @@ export const removeLike = id => async dispatch => {
 // Delete post
 export const deletePost = id => async dispatch => {
   try {
-    await axios.delete(`/api/posts/${id}`);
+    const approved = window.confirm(
+      'Are you sure you want to delet this post?'
+    );
+    if (approved) {
+      await axios.delete(`/api/posts/${id}`);
 
-    dispatch({
-      type: DELETE_POST,
-      payload: id
-    });
+      dispatch({
+        type: DELETE_POST,
+        payload: id
+      });
 
-    dispatch(setAlert('Post Removed', 'success'));
+      dispatch(setAlert('Post Removed', 'success'));
+    }
   } catch (err) {
     dispatch({
       type: POST_ERROR,

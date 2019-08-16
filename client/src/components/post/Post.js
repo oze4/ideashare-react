@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import Spinner from '../layout/Spinner';
 import PropTypes from 'prop-types';
 import { getPost, getPosts } from '../../actions/post';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import Moment from 'react-moment';
 import CommentForm from './CommentForm';
 import CommentItem from './CommentItem';
@@ -16,7 +16,8 @@ const Post = ({
   match,
   auth,
   deletePost,
-  toggleLike
+  toggleLike,
+  alert
 }) => {
   useEffect(() => {
     getPost(match.params.id);
@@ -50,6 +51,15 @@ const Post = ({
                 <span className='comment-count'>{post.comments.length}</span>
               )}
             </span>
+
+            {!auth.loading &&
+              auth.isAuthenticated &&
+              auth.user &&
+              post.user === auth.user._id && (
+                <button onClick={e => deletePost(post._id)} type='button'>
+                  Delete this post
+                </button>
+              )}
           </div>
         </div>
 
@@ -96,6 +106,10 @@ const Post = ({
           ))}
         </div>
       </div>
+
+      {alert.length > 0 &&
+        alert[0].msg === 'Post Removed' &&
+        alert[0].alertType === 'success' && <Redirect to='/posts' />}
     </Fragment>
   );
 };
@@ -109,7 +123,9 @@ Post.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  post: state.post
+  post: state.post,
+  auth: state.auth,
+  alert: state.alert
 });
 
 export default connect(

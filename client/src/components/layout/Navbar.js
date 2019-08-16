@@ -15,21 +15,22 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
       </li> */}
 
       <li>
-        <a onClick={logout} href='/posts'>
-          <i className='fas fa-sign-out-alt' />
-          {'  '}
-          <span className='hide-sm'>Log out</span>
-        </a>
-      </li>
-      <li>
         <Link to='/post-form'>+</Link>
       </li>
 
       <li>
         <Link to='/dashboard'>
           <i className='fas fa-user' />{' '}
-          <span className='hide-sm'>Dashboard</span>
+          <span className='hide-sm'>Your Profile</span>
         </Link>
+      </li>
+
+      <li>
+        <a onClick={logout} href='/posts'>
+          <i className='fas fa-sign-out-alt' />
+          {'  '}
+          <span className='hide-sm'>Log out</span>
+        </a>
       </li>
     </ul>
   );
@@ -58,7 +59,7 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
   return (
     <nav className='navbar bg-primary'>
       <h1>
-        <Link to='/posts'>IDEA share</Link>
+        <Link to='/posts'>IDEATOSHARE</Link>
       </h1>
       {!loading && (
         <Fragment>{isAuthenticated ? authLinks : guestLinks}</Fragment>

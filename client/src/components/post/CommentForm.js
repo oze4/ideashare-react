@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { addComment } from '../../actions/post';
 
 const CommentForm = ({ auth, postId, addComment }) => {
@@ -17,19 +18,26 @@ const CommentForm = ({ auth, postId, addComment }) => {
           setText('');
         }}
       >
-        {!auth.loading && auth.isAuthenticated && (
-          <img className='avatar' src={auth.user.avatar} alt='user-avatar' />
+        {!auth.loading && auth.isAuthenticated ? (
+          <Fragment>
+            <img className='avatar' src={auth.user.avatar} alt='user-avatar' />
+            <textarea
+              name='title'
+              rows='1'
+              placeholder='What do you think?'
+              value={text}
+              onChange={e => setText(e.target.value)}
+              required
+            />
+            <input type='submit' className='btn btn-dark my-1' value='Submit' />
+          </Fragment>
+        ) : (
+          <Fragment>
+            <p>
+              Please <Link to='/login'>log in</Link> to comment
+            </p>
+          </Fragment>
         )}
-
-        <textarea
-          name='title'
-          rows='1'
-          placeholder='What do you think?'
-          value={text}
-          onChange={e => setText(e.target.value)}
-          required
-        />
-        <input type='submit' className='btn btn-dark my-1' value='Submit' />
       </form>
     </div>
   );
