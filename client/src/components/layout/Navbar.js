@@ -26,7 +26,7 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
       </li>
 
       <li>
-        <a onClick={logout} href='/posts'>
+        <a onClick={logout} href='/'>
           <i className='fas fa-sign-out-alt' />
           {'  '}
           <span className='hide-sm'>Log out</span>
@@ -59,7 +59,7 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
   return (
     <nav className='navbar bg-primary'>
       <h1>
-        <Link to='/posts'>IDEATOSHARE</Link>
+        <Link to='/'>IDEATOSHARE</Link>
       </h1>
       {!loading && (
         <Fragment>{isAuthenticated ? authLinks : guestLinks}</Fragment>

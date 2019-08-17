@@ -42,14 +42,14 @@ const App = () => {
           <div className='alert-container'>
             <Alert />
           </div>
-          <Route exact path='/' component={Landing} />
+          <Route exact path='/landing' component={Landing} />
           <section className='container'>
             <Switch>
               <Route exact path='/register' component={Register} />
               <Route exact path='/login' component={Login} />
               <Route exact path='/profiles' component={Profiles} />
               <Route exact path='/profile/:id' component={Profile} />
-              <Route exact path='/posts' component={Posts} />
+              <Route exact path='/' component={Posts} />
               <Route exact path='/posts/:id' component={Post} />
               <Route exact path='/post-form' component={PostForm} />
               <PrivateRoute exact path='/dashboard' component={Dashboard} />
