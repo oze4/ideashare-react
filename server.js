@@ -4,7 +4,7 @@ const app = express();
 const path = require('path');
 connectDB();
 
-const PORT = process.env.PORT || 80;
+const PORT = process.env.PORT || 5000;
 
 // for auto reload
 // const http = require('http');
