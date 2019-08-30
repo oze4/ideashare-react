@@ -45,7 +45,7 @@ export const getProfiles = () => async dispatch => {
   }
 };
 
-// Get profile by ID
+// Get profile by ID (other users)
 
 export const getProfileById = userId => async dispatch => {
   try {

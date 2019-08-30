@@ -3,13 +3,14 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Moment from 'react-moment';
-import { deleteComment } from '../../actions/post';
+import { deleteComment, toggleCommentLike } from '../../actions/post';
 
 const CommentItem = ({
   postId,
-  comment: { _id, text, name, avatar, user, date },
+  comment: { _id, text, name, avatar, user, date, likes },
   auth,
-  deleteComment
+  deleteComment,
+  toggleCommentLike
 }) => (
   <div className='comment-item'>
     <div>
@@ -23,6 +24,11 @@ const CommentItem = ({
       <p class='comment-date'>
         <Moment format='YYYY/MM/DD'>{date}</Moment>
       </p>
+
+      <button onClick={e => toggleCommentLike(postId, _id)}>
+        like
+        {likes.length}
+      </button>
 
       {!auth.loading && auth.isAuthenticated && user === auth.user._id && (
         <button
@@ -42,7 +48,8 @@ CommentItem.propTypes = {
   postId: PropTypes.number.isRequired,
   comment: PropTypes.object.isRequired,
   auth: PropTypes.object.isRequired,
-  deleteComment: PropTypes.func.isRequired
+  deleteComment: PropTypes.func.isRequired,
+  toggleCommentLike: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
@@ -51,5 +58,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { deleteComment }
+  { deleteComment, toggleCommentLike }
 )(CommentItem);

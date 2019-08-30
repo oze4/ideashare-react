@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { Redirect } from 'react-router-dom';
+import { Redirect, withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { addPost } from '../../actions/post';
 
-const PostForm = ({ post: { post }, addPost, alert }) => {
+const PostForm = ({ post: { post }, addPost, alert, history }) => {
   const [formData, setFormData] = useState({
     title: '',
     body: ''
@@ -15,7 +15,7 @@ const PostForm = ({ post: { post }, addPost, alert }) => {
       <form
         onSubmit={e => {
           e.preventDefault();
-          addPost(formData);
+          addPost(formData, history);
           setFormData('');
         }}
       >
@@ -37,12 +37,6 @@ const PostForm = ({ post: { post }, addPost, alert }) => {
         />
         <input type='submit' className='btn btn-primary m-2' value='Submit' />
       </form>
-
-      {alert.length > 0 &&
-        alert[0].msg === 'Post Created' &&
-        alert[0].alertType === 'success' && (
-          <Redirect to={`/posts/${alert[0].id}`} />
-        )}
     </div>
   );
 };
@@ -59,4 +53,4 @@ const mapStateToProps = state => ({
 export default connect(
   mapStateToProps,
   { addPost }
-)(PostForm);
+)(withRouter(PostForm));

@@ -26,6 +26,7 @@ export const GET_POST = 'GET_POST';
 export const POST_ERROR = 'POST_ERROR';
 
 export const UPDATE_LIKES = 'UPDATE_LIKES';
+export const UPDATE_COMMENT_LIKES = 'UPDATE_COMMENT_LIKES';
 export const DELETE_POST = 'DELETE_POST';
 
 export const UPDATE_STATUS = 'UPDATE_STATUS';

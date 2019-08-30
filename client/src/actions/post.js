@@ -8,6 +8,7 @@ import {
   ADD_POST,
   GET_POST,
   UPDATE_LIKES,
+  UPDATE_COMMENT_LIKES,
   ADD_COMMENT,
   REMOVE_COMMENT,
   UPDATE_STATUS
@@ -67,6 +68,27 @@ export const toggleLike = id => async dispatch => {
   }
 };
 
+// toggleLike of a comment
+export const toggleCommentLike = (id, comment_id) => async dispatch => {
+  try {
+    const res = await axios.put(
+      `/api/posts/comment/${id}/${comment_id}/togglelike_comment`
+    );
+
+    dispatch({
+      type: UPDATE_COMMENT_LIKES,
+      payload: res.data
+    });
+  } catch (err) {
+    dispatch(setAlert('Please login to like', 'danger'));
+
+    dispatch({
+      type: POST_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status }
+    });
+  }
+};
+
 //Add like
 export const addLike = id => async dispatch => {
   try {
@@ -102,7 +124,7 @@ export const removeLike = id => async dispatch => {
 };
 
 // Delete post
-export const deletePost = id => async dispatch => {
+export const deletePost = (id, history) => async dispatch => {
   try {
     const approved = window.confirm(
       'Are you sure you want to delet this post?'
@@ -116,6 +138,7 @@ export const deletePost = id => async dispatch => {
       });
 
       dispatch(setAlert('Post Removed', 'success'));
+      history.push('/');
     }
   } catch (err) {
     dispatch({
@@ -125,7 +148,7 @@ export const deletePost = id => async dispatch => {
   }
 };
 
-export const addPost = formData => async dispatch => {
+export const addPost = (formData, history) => async dispatch => {
   const config = {
     headers: {
       'Content-Type': 'application/json'
@@ -139,6 +162,7 @@ export const addPost = formData => async dispatch => {
     });
 
     dispatch(setAlert('Post Created', 'success'));
+    history.push(`/posts/${res.data._id}`);
   } catch (err) {
     dispatch({
       type: POST_ERROR,
@@ -165,7 +189,7 @@ export const addComment = (postId, formData) => async dispatch => {
       payload: res.data
     });
 
-    dispatch(setAlert('Post Added', 'success'));
+    dispatch(setAlert('Comment Added', 'success'));
   } catch (err) {
     dispatch({
       type: POST_ERROR,

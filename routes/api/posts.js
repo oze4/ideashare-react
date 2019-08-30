@@ -136,6 +136,48 @@ router.put('/togglelike/:id', auth, async (req, res) => {
   }
 });
 
+// @ route    PUT api/posts/comment/:id/:comment_id/togglelike
+// @desc      Like and dislike a comment (toggle)
+// @access    Private
+router.put(
+  '/comment/:id/:comment_id/togglelike_comment',
+  auth,
+  async (req, res) => {
+    try {
+      let post = await Post.findById(req.params.id);
+
+      //Check if the comment of the post has already been liked by this user
+
+      const comments = post.comments.map((comment, index) => {
+        // check whether it is the right comment or not
+        if (comment._id.toString() === req.params.comment_id) {
+          // check whether the user already liked?
+          if (
+            comment.likes.filter(like => like.user.toString() === req.user.id)
+              .length > 0
+          ) {
+            const removeIndex = comment.likes
+              .map(like => like.user.toString())
+              .indexOf(req.user.id);
+            comment.likes.splice(removeIndex, 1);
+          } else {
+            comment.likes.unshift({ user: req.user.id });
+          }
+          return comment;
+        } else {
+          return comment;
+        }
+      });
+      post.comments = comments;
+      await post.save();
+      res.json(comments);
+    } catch (err) {
+      console.error(err.message);
+      res.status(500).send('Server Error');
+    }
+  }
+);
+
 // @ route    PUT api/posts/like/:id
 // @desc      Like a post (only once)
 // @access    Private
