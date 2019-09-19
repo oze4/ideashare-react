@@ -102,15 +102,23 @@ const Post = ({
       <div className='discussion-section'>
         <CommentForm postId={post._id} />
         <div className='comments'>
-          {post.comments.map(comment => (
-            <Fragment>
-              <CommentItem
-                key={comment._id}
-                comment={comment}
-                postId={post._id}
-              />
-            </Fragment>
-          ))}
+          {post.comments
+            .sort((a, b) =>
+              a.likes.length > b.likes.length
+                ? -1
+                : b.likes.length > a.likes.length
+                ? 1
+                : 0
+            )
+            .map(comment => (
+              <Fragment>
+                <CommentItem
+                  key={comment._id}
+                  comment={comment}
+                  postId={post._id}
+                />
+              </Fragment>
+            ))}
         </div>
       </div>
     </Fragment>

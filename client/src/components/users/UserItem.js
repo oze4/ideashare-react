@@ -9,6 +9,21 @@ const UserItem = ({ user: { users, loading }, getUsers }) => {
   useEffect(() => {
     getUsers();
   }, [getUsers]);
+
+  const shuffleWords = array => {
+    var currentIndex = array.length,
+      temporaryValue,
+      randomIndex;
+    while (0 !== currentIndex) {
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex -= 1;
+      temporaryValue = array[currentIndex];
+      array[currentIndex] = array[randomIndex];
+      array[randomIndex] = temporaryValue;
+    }
+    return array;
+  };
+
   return (
     <Fragment>
       {loading || users === null ? (
@@ -16,12 +31,12 @@ const UserItem = ({ user: { users, loading }, getUsers }) => {
       ) : (
         <div className='users-grid'>
           <p className='lead'>
-            <i className='fab fa-connectdevelop' /> Our Ideators
+            <i className='fab fa-connectdevelop' /> Our Ideators Today
           </p>
           <div className='users'>
             <div className='flex'>
               {users.length > 0 ? (
-                users.map(user => (
+                shuffleWords(users).map(user => (
                   <div key={user._id}>
                     <Link to={`/profile/${user._id}`}>
                       <img className='user-avatar' src={user.avatar} />

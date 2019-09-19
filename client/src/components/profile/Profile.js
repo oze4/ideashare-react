@@ -30,7 +30,7 @@ const Profile = ({
         <Fragment>
           {!profile ? (
             <Fragment>
-              <h1>Sorry, this user doesn't not exist anymore</h1>
+              <h1>Sorry, this user doesn't create a profile yet</h1>
               <Link to='/'>
                 <i class='fas fa-chevron-left'></i>Back to Home
               </Link>

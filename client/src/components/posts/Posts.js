@@ -17,9 +17,17 @@ const Posts = ({ getPosts, post: { posts, loading } }) => {
       <div className='posts-grid'>
         <h1 className='large text-primary'>Ideas</h1>
         <div className='posts'>
-          {posts.map(post => (
-            <PostItem key={post._id} post={post} />
-          ))}
+          {posts
+            .sort((a, b) =>
+              a.likes.length > b.likes.length
+                ? -1
+                : b.likes.length > a.likes.length
+                ? 1
+                : 0
+            )
+            .map(post => (
+              <PostItem key={post._id} post={post} />
+            ))}
         </div>
       </div>
 

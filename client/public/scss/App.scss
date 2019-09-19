@@ -205,6 +205,9 @@ a {
   }
   .middle {
     grid-area: idea-content;
+    .post-item-content {
+      font-size: 1.3rem;
+    }
     .border-btn {
       border: 0.5px solid $light-grey;
       padding: 0.2rem 0.5rem;
@@ -412,7 +415,6 @@ section.category {
 i.fa-sort-up {
   font-size: 2rem;
   vertical-align: middle;
-  color: $light-grey;
 }
 
 // .idea-form {

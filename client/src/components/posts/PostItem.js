@@ -46,7 +46,7 @@ const PostItem = ({
           )}
       </div>
       <Link to={`posts/${_id}`} className='middle'>
-        <p className='my-1 lead'>{title}</p>
+        <p className='my-1 post-item-content'>{title}</p>
         <p className='post-date small'>
           Posted on <Moment format='YYYY/MM/DD'>{date}</Moment>
         </p>
@@ -71,7 +71,7 @@ const PostItem = ({
             type='button'
             className='btn toggle-like primary-border'
           >
-            <i class='fas fa-sort-up' />{' '}
+            <i class='fas fa-sort-up text-primary' />{' '}
             <div className='comment-count'>
               {likes.length > 0 ? likes.length : 0}
             </div>
@@ -82,7 +82,7 @@ const PostItem = ({
             type='button'
             className='btn toggle-like'
           >
-            <i class='fas fa-sort-up' />{' '}
+            <i class='fas fa-sort-up text-grey' />{' '}
             <div className='comment-count'>
               {likes.length > 0 ? likes.length : 0}
             </div>
