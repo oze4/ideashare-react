@@ -26,6 +26,8 @@ export const GET_POST = 'GET_POST';
 export const POST_ERROR = 'POST_ERROR';
 
 export const UPDATE_LIKES = 'UPDATE_LIKES';
+export const UPDATE_LIKE = 'UPDATE_LIKE';
+
 export const UPDATE_COMMENT_LIKES = 'UPDATE_COMMENT_LIKES';
 export const DELETE_POST = 'DELETE_POST';
 
@@ -35,5 +37,8 @@ export const ADD_POST = 'ADD_POST';
 
 export const ADD_COMMENT = 'ADD_COMMENT';
 export const REMOVE_COMMENT = 'REMOVE_COMMENT';
+
+export const ADD_SUB_COMMENT = 'ADD_SUB_COMMENT';
+export const REMOVE_SUB_COMMENT = 'REMOVE_SUB_COMMENT';
 
 export const GET_USERS = 'GET_USERS';

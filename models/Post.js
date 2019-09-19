@@ -94,7 +94,7 @@ const PostSchema = new Schema({
   },
   status: {
     type: String,
-    default: 'red'
+    default: 'default'
   }
 });
 

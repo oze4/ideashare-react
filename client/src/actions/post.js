@@ -8,18 +8,19 @@ import {
   ADD_POST,
   GET_POST,
   UPDATE_LIKES,
+  UPDATE_LIKE,
   UPDATE_COMMENT_LIKES,
   ADD_COMMENT,
   REMOVE_COMMENT,
+  ADD_SUB_COMMENT,
+  REMOVE_SUB_COMMENT,
   UPDATE_STATUS
 } from './types';
 
 //Get posts
 export const getPosts = () => async dispatch => {
   try {
-    console.log('1');
     const res = await axios.get('/api/posts');
-    console.log('2');
     dispatch({
       type: GET_POSTS,
       payload: res.data
@@ -57,6 +58,25 @@ export const toggleLike = id => async dispatch => {
     dispatch({
       type: UPDATE_LIKES,
       payload: { id, likes: res.data }
+    });
+  } catch (err) {
+    dispatch(setAlert('Please login to vote', 'danger'));
+
+    dispatch({
+      type: POST_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status }
+    });
+  }
+};
+
+// toggleLike
+export const toggleLikePostPage = id => async dispatch => {
+  try {
+    const res = await axios.put(`/api/posts/togglelike/${id}`);
+
+    dispatch({
+      type: UPDATE_LIKE,
+      payload: res.data
     });
   } catch (err) {
     dispatch(setAlert('Please login to vote', 'danger'));
@@ -198,6 +218,37 @@ export const addComment = (postId, formData) => async dispatch => {
   }
 };
 
+// add subcomment
+export const addSubComment = (
+  postId,
+  commentId,
+  formData
+) => async dispatch => {
+  const config = {
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  };
+  try {
+    const res = await axios.post(
+      `/api/posts/comment/${postId}/${commentId}`,
+      formData,
+      config
+    );
+    dispatch({
+      type: ADD_SUB_COMMENT,
+      payload: res.data
+    });
+
+    dispatch(setAlert('Comment Added', 'success'));
+  } catch (err) {
+    dispatch({
+      type: POST_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status }
+    });
+  }
+};
+
 // Delete Comment
 export const deleteComment = (postId, commentId) => async dispatch => {
   try {
@@ -205,6 +256,32 @@ export const deleteComment = (postId, commentId) => async dispatch => {
     dispatch({
       type: REMOVE_COMMENT,
       payload: commentId
+    });
+
+    dispatch(setAlert('Comment Removed', 'success'));
+  } catch (err) {
+    dispatch({
+      type: POST_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status }
+    });
+  }
+};
+
+export const toggleLikeSubcomment = () => {};
+
+// Delete a subcomment
+export const deleteSubComment = (
+  postId,
+  commentId,
+  subcommentId
+) => async dispatch => {
+  try {
+    const res = await axios.delete(
+      `/api/posts/comment/subcomment/${postId}/${commentId}/${subcommentId}`
+    );
+    dispatch({
+      type: REMOVE_SUB_COMMENT,
+      payload: res.data
     });
 
     dispatch(setAlert('Comment Removed', 'success'));

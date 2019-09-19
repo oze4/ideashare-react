@@ -7,7 +7,8 @@ import { Link, withRouter } from 'react-router-dom';
 import Moment from 'react-moment';
 import CommentForm from './CommentForm';
 import CommentItem from './CommentItem';
-import { deletePost, toggleLike } from '../../actions/post';
+import SubCommentForm from './SubCommentForm';
+import { deletePost, toggleLikePostPage } from '../../actions/post';
 
 const Post = ({
   getPost,
@@ -16,7 +17,7 @@ const Post = ({
   match,
   auth,
   deletePost,
-  toggleLike,
+  toggleLikePostPage,
   alert,
   history
 }) => {
@@ -73,7 +74,7 @@ const Post = ({
           post.likes.filter(arrayItem => arrayItem.user === auth.user._id)
             .length > 0 ? (
             <button
-              onClick={e => toggleLike(post._id)}
+              onClick={e => toggleLikePostPage(post._id)}
               type='button'
               className='btn toggle-like primary-border'
             >
@@ -84,7 +85,7 @@ const Post = ({
             </button>
           ) : (
             <button
-              onClick={e => toggleLike(post._id)}
+              onClick={e => toggleLikePostPage(post._id)}
               type='button'
               className='btn toggle-like'
             >
@@ -102,11 +103,13 @@ const Post = ({
         <CommentForm postId={post._id} />
         <div className='comments'>
           {post.comments.map(comment => (
-            <CommentItem
-              key={comment._id}
-              comment={comment}
-              postId={post._id}
-            />
+            <Fragment>
+              <CommentItem
+                key={comment._id}
+                comment={comment}
+                postId={post._id}
+              />
+            </Fragment>
           ))}
         </div>
       </div>
@@ -119,7 +122,7 @@ Post.propTypes = {
   post: PropTypes.object.isRequired,
   posts: PropTypes.object.isRequired,
   deletePost: PropTypes.func.isRequired,
-  toggleLike: PropTypes.func.isRequired
+  toggleLikePostPage: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
@@ -130,5 +133,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { getPost, getPosts, deletePost, toggleLike }
+  { getPost, getPosts, deletePost, toggleLikePostPage }
 )(withRouter(Post));

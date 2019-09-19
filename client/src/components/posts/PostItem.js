@@ -9,28 +9,43 @@ const PostItem = ({
   deletePost,
   toggleStatus,
   auth,
-  post: { _id, title, name, avatar, user, likes, comments, date, status }
+  post: { _id, title, name, avatar, user, likes, comments, date, status },
+  history
 }) => {
   let xxx;
   if (status === 'red') {
-    xxx = <i className='fas fa-times red' />;
+    // xxx = <i className='fas fa-times red' />;
+    xxx = <p>To Tackle</p>;
   } else if (status === 'yellow') {
-    xxx = <i className='fas fa-spinner yellow' />;
+    // xxx = <i className='fas fa-spinner yellow' />;
+    xxx = <p>On Progress</p>;
+  } else if (status === 'green') {
+    // xxx = <i className='fas fa-check green' />;
+    xxx = <p>Done</p>;
   } else {
-    xxx = <i className='fas fa-check green' />;
+    xxx = <p>No Status</p>;
   }
   return (
-    <div className='post-item'>
+    <div className={`post-item ${status}-border`}>
       <div className='left'>
         <Link to={`/profile/${user}`}>
           <img className='post-avatar' src={avatar} alt={`avatar${name}`} />
           <p>{name}</p>
         </Link>
-        <button className='status' onClick={e => toggleStatus(_id)}>
-          {xxx}
-        </button>
+        {!auth.loading &&
+          auth.isAuthenticated &&
+          auth.user &&
+          user === auth.user._id && (
+            <button
+              onClick={e => deletePost(_id, history)}
+              type='button'
+              className='delete-post-button'
+            >
+              <i class='fas fa-trash-alt'></i>
+            </button>
+          )}
       </div>
-      <div className='middle'>
+      <Link to={`posts/${_id}`} className='middle'>
         <p className='my-1 lead'>{title}</p>
         <p className='post-date small'>
           Posted on <Moment format='YYYY/MM/DD'>{date}</Moment>
@@ -44,19 +59,7 @@ const PostItem = ({
             </span>
           </Link>
         </span>
-        {/* {!auth.loading &&
-          auth.isAuthenticated &&
-          auth.user &&
-          user === auth.user._id && (
-            <button
-              onClick={e => deletePost(_id)}
-              type='button'
-              className='btn btn-danger'
-            >
-              <i className='fas fa-times' />
-            </button>
-          )} */}
-      </div>
+      </Link>
 
       <div className='right'>
         {auth &&
@@ -85,6 +88,11 @@ const PostItem = ({
             </div>
           </button>
         )}
+
+        <button className='status' onClick={e => toggleStatus(_id)}>
+          <p className='status1'>status</p>
+          <p className={`status2 ${status}-status`}>{xxx}</p>
+        </button>
       </div>
     </div>
   );

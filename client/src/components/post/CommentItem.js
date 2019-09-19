@@ -1,48 +1,86 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Moment from 'react-moment';
 import { deleteComment, toggleCommentLike } from '../../actions/post';
+import SubCommentItem from './SubCommentItem';
+import SubCommentForm from './SubCommentForm';
 
 const CommentItem = ({
   postId,
-  comment: { _id, text, name, avatar, user, date, likes },
+  comment: { _id, text, name, avatar, user, date, likes, subComments },
   auth,
   deleteComment,
   toggleCommentLike
-}) => (
-  <div className='comment-item'>
-    <div>
-      <Link className='user' to={`/profile/${user}`}>
-        <img className='avatar' src={avatar} alt='' />
-        <h4 className='user-name'>{name}</h4>
-      </Link>
-    </div>
-    <div>
-      <p className='comment-content'>{text}</p>
-      <p class='comment-date'>
-        <Moment format='YYYY/MM/DD'>{date}</Moment>
-      </p>
+}) => {
+  const [displayForm, toggleDisplayForm] = useState(false);
+  return (
+    <div className='comment-item'>
+      <div>
+        <Link className='user' to={`/profile/${user}`}>
+          <img className='avatar' src={avatar} alt='' />
+          <h4 className='user-name'>{name}</h4>
+        </Link>
+      </div>
+      <div>
+        <p className='comment-content'>{text}</p>
+        <p class='comment-date'>
+          <Moment format='YYYY/MM/DD'>{date}</Moment>
+        </p>
 
-      <button onClick={e => toggleCommentLike(postId, _id)}>
-        like
-        {likes.length}
-      </button>
+        <div className='comment-panel'>
+          {auth &&
+          auth.user &&
+          likes.filter(arrayItem => arrayItem.user === auth.user._id).length >
+            0 ? (
+            <button
+              className='text-primary'
+              onClick={e => toggleCommentLike(postId, _id)}
+            >
+              Upvote &#40;
+              {likes.length}&#41;
+            </button>
+          ) : (
+            <button onClick={e => toggleCommentLike(postId, _id)}>
+              Upvote &#40;
+              {likes.length}&#41;
+            </button>
+          )}
+          <button
+            className='toggle-form-button'
+            onClick={e => toggleDisplayForm(!displayForm)}
+          >
+            {!displayForm ? <p>Reply</p> : <p>Reply</p>}
+          </button>
+        </div>
 
-      {!auth.loading && auth.isAuthenticated && user === auth.user._id && (
-        <button
-          onClick={e => deleteComment(postId, _id)}
-          type='button'
-          className='remove-comment'
-        >
-          Delete
-          {/* <i className='fas fa-times' /> */}
-        </button>
-      )}
+        {!auth.loading && auth.isAuthenticated && user === auth.user._id && (
+          <button
+            onClick={e => deleteComment(postId, _id)}
+            type='button'
+            className='remove-comment'
+          >
+            Delete
+            {/* <i className='fas fa-times' /> */}
+          </button>
+        )}
+
+        <div className='subcomment-section'>
+          <div className='subcomment-form'>
+            {displayForm && <SubCommentForm postId={postId} commentId={_id} />}
+          </div>
+
+          <div className='subcomment-items'>
+            {subComments.map(subcomment => (
+              <SubCommentItem subcomment={subcomment} postId={postId} />
+            ))}
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 CommentItem.propTypes = {
   postId: PropTypes.number.isRequired,

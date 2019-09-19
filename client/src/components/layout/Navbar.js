@@ -6,14 +6,6 @@ import { logout } from '../../actions/auth';
 const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
   const authLinks = (
     <ul>
-      {/* <li>
-        <Link to='/profiles'>Ideators</Link>
-      </li> */}
-
-      {/* <li>
-        <Link to='/posts'>Posts</Link>
-      </li> */}
-
       <li>
         <Link to='/post-form'>+</Link>
       </li>
@@ -21,7 +13,7 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
       <li>
         <Link to='/dashboard'>
           <i className='fas fa-user' />{' '}
-          <span className='hide-sm'>Your Profile</span>
+          <span className='hide-sm'>My Dashboard</span>
         </Link>
       </li>
 
@@ -37,13 +29,6 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
 
   const guestLinks = (
     <ul>
-      {/* <li>
-        <Link to='/profiles'>Ideators</Link>
-      </li> */}
-      {/* <li>
-        <Link to='/posts'>Posts</Link>
-      </li> */}
-
       <li>
         <Link to='/login'>+</Link>
       </li>
@@ -57,10 +42,15 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
     </ul>
   );
   return (
-    <nav className='navbar bg-primary'>
-      <h1>
-        <Link to='/'>IDEATOSHARE</Link>
-      </h1>
+    <nav className='navbar bg-white'>
+      <div className='left-nav'>
+        <h1>
+          <Link to='/'>IDEATOSHARE</Link>
+        </h1>
+
+        <Link to='/about'>About</Link>
+      </div>
+
       {!loading && (
         <Fragment>{isAuthenticated ? authLinks : guestLinks}</Fragment>
       )}

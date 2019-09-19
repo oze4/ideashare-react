@@ -22,14 +22,15 @@ const CommentForm = ({ auth, postId, addComment }) => {
           <Fragment>
             <img className='avatar' src={auth.user.avatar} alt='user-avatar' />
             <textarea
+              className='comment-area-responsive'
               name='title'
-              rows='1'
+              // rows='1'
               placeholder='What do you think?'
               value={text}
               onChange={e => setText(e.target.value)}
               required
             />
-            <input type='submit' className='btn btn-dark my-1' value='Submit' />
+            <input type='submit' className='btn btn-primary' value='Comment' />
           </Fragment>
         ) : (
           <Fragment>

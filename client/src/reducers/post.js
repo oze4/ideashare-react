@@ -2,12 +2,15 @@ import {
   GET_POSTS,
   POST_ERROR,
   UPDATE_LIKES,
+  UPDATE_LIKE,
   UPDATE_COMMENT_LIKES,
   DELETE_POST,
   ADD_POST,
   GET_POST,
   ADD_COMMENT,
   REMOVE_COMMENT,
+  ADD_SUB_COMMENT,
+  REMOVE_SUB_COMMENT,
   UPDATE_STATUS
 } from '../actions/types';
 
@@ -67,6 +70,12 @@ export default function(state = initialState, action) {
         ),
         loading: false
       };
+    case UPDATE_LIKE:
+      return {
+        ...state,
+        post: { ...state.post, likes: payload },
+        loading: false
+      };
 
     case UPDATE_STATUS:
       return {
@@ -90,6 +99,15 @@ export default function(state = initialState, action) {
         post: { ...state.post, comments: payload },
         loading: false
       };
+
+    case ADD_SUB_COMMENT:
+      return {
+        ...state,
+        // payload is all the comments of a post
+        post: { ...state.post, comments: payload },
+        loading: false
+      };
+
     case REMOVE_COMMENT:
       return {
         ...state,
@@ -101,6 +119,26 @@ export default function(state = initialState, action) {
           loading: false
         }
       };
+
+    case REMOVE_SUB_COMMENT:
+      return {
+        ...state,
+        post: {
+          ...state.post,
+          comments: payload
+          // comments: state.post.comments.map(comment =>
+          //   {
+          //   if (comment._id === payload.commentId) {
+          //     comment.subComments.filter(
+          //       subcomment => subcomment._id === payload.subcommentId
+          //     );
+          //   }
+          // }
+          // )
+        },
+        loading: false
+      };
+
     default:
       return state;
   }

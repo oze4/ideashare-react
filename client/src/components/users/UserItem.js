@@ -1,6 +1,7 @@
 import React, { Fragment, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import Spinner from '../layout/Spinner';
 import { getUsers } from '../../actions/user';
 
@@ -22,7 +23,9 @@ const UserItem = ({ user: { users, loading }, getUsers }) => {
               {users.length > 0 ? (
                 users.map(user => (
                   <div key={user._id}>
-                    <img className='user-avatar' src={user.avatar} />
+                    <Link to={`/profile/${user._id}`}>
+                      <img className='user-avatar' src={user.avatar} />
+                    </Link>
                   </div>
                 ))
               ) : (

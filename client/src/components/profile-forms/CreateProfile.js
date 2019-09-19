@@ -41,7 +41,7 @@ const CreateProfile = ({ createProfile, history }) => {
     createProfile(formData, history);
   };
   return (
-    <Fragment>
+    <div className='edit-profile-section'>
       <h1 className='large text-primary'>Create Your Profile</h1>
       <p className='lead'>
         <i className='fas fa-user' /> Let's get some information to make your
@@ -52,13 +52,11 @@ const CreateProfile = ({ createProfile, history }) => {
         <div className='form-group'>
           <select name='status' value={status} onChange={e => onChange(e)}>
             <option value='0'>* Select Professional Status</option>
+            <option value='Artist'>Artist</option>
             <option value='Developer'>Developer</option>
-            <option value='Junior Developer'>Junior Developer</option>
-            <option value='Senior Developer'>Senior Developer</option>
-            <option value='Manager'>Manager</option>
-            <option value='Student or Learning'>Student or Learning</option>
-            <option value='Instructor'>Instructor or Teacher</option>
-            <option value='Intern'>Intern</option>
+            <option value='Designer'>Designer</option>
+            <option value='Professor'>Professor</option>
+            <option value='Student'>Student</option>
             <option value='Other'>Other</option>
           </select>
           <small className='form-text'>
@@ -183,11 +181,11 @@ const CreateProfile = ({ createProfile, history }) => {
         )}
 
         <input type='submit' className='btn btn-primary my-1' />
-        <Link className='btn btn-light my-1' to='dashboard'>
+        <Link className='m-1' to='dashboard'>
           Go Back
         </Link>
       </form>
-    </Fragment>
+    </div>
   );
 };
 

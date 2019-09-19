@@ -60,6 +60,20 @@ router.get('/', async (req, res) => {
   }
 });
 
+// @ route    GET api/posts
+// @desc      Get all posts of a single user to show in dashboard
+// @access    Public
+// router.get('/mypost', auth, async (req, res) => {
+//   try {
+//     //no need to populate because the name and avatar are already in the post model
+//     const posts = await Post.find({ user: req.user.id }).sort({ date: -1 });
+//     res.json(posts);
+//   } catch (err) {
+//     console.error(err.message);
+//     res.send(500).send('Server Error');
+//   }
+// });
+
 // @ route    GET api/posts/:post_id
 // @desc      Get a single post by ID
 // @access    Public
@@ -178,6 +192,88 @@ router.put(
   }
 );
 
+// @ route    POST api/posts/comment/subcomment/:id/:comment_id/:subcomment_id
+// @desc      Post a comment to a comment
+// @access    Private
+router.post('/comment/:id/:comment_id', auth, async (req, res) => {
+  try {
+    console.log('1');
+    const user = await User.findById(req.user.id).select('-password');
+    const post = await Post.findById(req.params.id);
+    console.log('2');
+    //user information (name and avatar) comes from the databse, not the request
+    const newSubComment = {
+      text: req.body.text,
+      name: user.name,
+      avatar: user.avatar,
+      user: req.user.id
+    };
+    console.log('3');
+    post.comments.map(comment => {
+      if (comment._id.toString() === req.params.comment_id) {
+        comment.subComments.unshift(newSubComment);
+      }
+      console.log('4');
+    });
+    await post.save();
+
+    res.json(post.comments);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
+});
+
+// @ route    POST api/posts/comment/subcomment/:id/:comment_id/:subcomment_id
+// @desc      Post a comment to a comment
+// @access    Private
+router.post(
+  '/comment/subcomment/:id/:comment_id/:subcomment_id',
+  auth,
+  async (req, res) => {
+    try {
+      const post = await Post.findById(req.params.id);
+      //Pull out a comment from the post
+      const comment = post.comments.find(
+        comment => comment.id === req.params.comment_id
+      );
+
+      const subcomment = comment.subComments.filter(subcomment => {
+        subcomment._id.toString() === req.params.subcomment_id;
+      });
+
+      //Make sure the comment exists
+      if (!comment) {
+        return res.status(404).json({ msg: 'Comment does not exist' });
+      }
+      //Check whether it's the right user
+      if (comment.user.toString() !== req.user.id) {
+        return res.status(401).json({ msg: 'User not authorized' });
+      }
+
+      //Get the remove index
+
+      const removeIndex = comment.subComments
+        .map((subcomment, index) => {
+          console.log(`index: ${index}`);
+          console.log(comment);
+          return subcomment.user.toString();
+        })
+        .indexOf(req.user.id);
+
+      console.log(`remove index ${removeIndex}`);
+
+      comment.subcomments.splice(removeIndex, 1);
+
+      await post.save();
+      res.json(post.comments);
+    } catch (err) {
+      console.error(err.message);
+      res.status(500).send('Server Error');
+    }
+  }
+);
+
 // @ route    PUT api/posts/like/:id
 // @desc      Like a post (only once)
 // @access    Private
@@ -229,6 +325,8 @@ router.put('/unlike/:id', auth, async (req, res) => {
     res.status(500).send('Server Error');
   }
 });
+
+// Comment Section
 
 // @ route    POST api/posts/comment/:id
 // @desc      Comment a post
@@ -292,9 +390,17 @@ router.delete('/comment/:id/:comment_id', auth, async (req, res) => {
     }
 
     //Get the remove index
+
     const removeIndex = post.comments
-      .map(comment => comment.user.toString())
+      .map((comment, index) => {
+        console.log(`index: ${index}`);
+        console.log(comment);
+        return comment.user.toString();
+      })
       .indexOf(req.user.id);
+
+    console.log(`remove index ${removeIndex}`);
+
     post.comments.splice(removeIndex, 1);
 
     await post.save();
@@ -304,6 +410,110 @@ router.delete('/comment/:id/:comment_id', auth, async (req, res) => {
     res.status(500).send('Server Error');
   }
 });
+
+// @ route    POST api/posts/comment/:id
+// @desc      Comment a post
+// @access    Private
+router.post(
+  '/subcomment/:id/:comment_id',
+  [
+    auth,
+    [
+      check('text', 'Text is required')
+        .not()
+        .isEmpty()
+    ]
+  ],
+  async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+    try {
+      const user = await User.findById(req.user.id).select('-password');
+      const post = await Post.findById(req.params.id);
+
+      //user information (name and avatar) comes from the databse, not the request
+      const newComment = {
+        text: req.body.text,
+        name: user.name,
+        avatar: user.avatar,
+        user: req.user.id
+      };
+
+      post.comments.map(comment => {
+        comment._id.toString() === req.params.comment_id && console.log('hi');
+        comment.subComments.unshift(newComment);
+      });
+      await post.save();
+
+      res.json(post.comments);
+    } catch (err) {
+      console.error(err.message);
+      res.status(500).send('Server Error');
+    }
+  }
+);
+
+// @ route    DELETE api/posts/comment/:id/:comment_id/:subcomment_id
+// @desc      Delete a subcomment of a comment (of a post)
+// @access    Private
+router.delete(
+  '/comment/subcomment/:id/:comment_id/:subcomment_id',
+  auth,
+  async (req, res) => {
+    try {
+      console.log('1');
+      const post = await Post.findById(req.params.id);
+      console.log('2');
+      //Pull out a comment from the post
+      const comment = post.comments.find(
+        comment => comment.id === req.params.comment_id
+      );
+
+      console.log('3');
+      const subcomment = comment.subComments.find(
+        subcomment => subcomment.id === req.params.subcomment_id
+      );
+      console.log('4');
+      //Make sure the comment exists
+      if (!comment) {
+        return res.status(404).json({ msg: 'Comment does not exist' });
+      }
+      //Check whether it's the right user
+      if (subcomment.user.toString() !== req.user.id) {
+        return res.status(401).json({ msg: 'User not authorized' });
+      }
+
+      console.log('5');
+      //Get the remove index
+      const removeIndex = comment.subComments
+        .map(subcomment => subcomment.user.toString())
+        .indexOf(req.user.id);
+      console.log('6');
+
+      post.comments.map((comment, index) => {
+        if (comment._id.toString() === req.params.comment_id) {
+          console.log(post.comments[index]);
+          post.comments[index].subComments.splice(removeIndex, 1);
+          // comment.subComments.map(subcomment => {
+          //   console.log('7');
+          //   if (subcomment._id.toString() === req.params.subcomment_id) {
+          //     console.log('8');
+          //     console.log('removeindex');
+          //     console.log(removeIndex);
+          //     console.log(subcomment);
+        }
+      });
+
+      await post.save();
+      res.json(post.comments);
+    } catch (err) {
+      console.error(err.message);
+      res.status(500).send('Server Error');
+    }
+  }
+);
 
 // update the status of the post
 // only the post owner can do it
@@ -319,6 +529,8 @@ router.put('/status/:id', auth, async (req, res) => {
       post.status = 'yellow';
     } else if (post.status === 'yellow') {
       post.status = 'green';
+    } else if (post.status === 'green') {
+      post.status = 'default';
     } else {
       post.status = 'red';
     }

@@ -11,7 +11,7 @@ const ProfileAbout = ({
   const firstName = name.trim().split(' ')[0];
 
   return (
-    <div class='profile-about bg-light p-2'>
+    <div class='profile-about'>
       {bio && (
         <Fragment>
           <h2 class='text-primary'>
@@ -20,7 +20,7 @@ const ProfileAbout = ({
               : `${firstName}'s`}{' '}
             Bio
           </h2>
-          <p>{bio}</p>
+          <p className='bio'>{bio}</p>
         </Fragment>
       )}
 

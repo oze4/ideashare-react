@@ -18,8 +18,18 @@ body {
   color: #333;
 }
 
+button {
+  font-family: 'Roboto', sans-serif;
+}
+
+.delete-post-button {
+  color: $light-grey;
+  font-size: 1rem;
+  margin: 0 1rem;
+}
 a {
   text-decoration: none;
+  color: $dark-color;
 }
 
 .flex {
@@ -37,12 +47,17 @@ a {
   width: 100%;
   top: 0;
   box-shadow: 0 6px 6px -6px #999;
+  .left-nav {
+    display: flex;
+    justify-content: left;
+    align-items: baseline;
+  }
   ul {
     display: flex;
     list-style: none;
   }
   a {
-    color: #fff;
+    color: $dark-color;
     padding: 0 1rem;
     transition: ease-in-out 0.3s;
     &:hover {
@@ -69,6 +84,63 @@ a {
   }
 }
 
+.about-section {
+  background-color: white;
+  margin: 5rem auto 3rem;
+  .container {
+    width: 90%;
+
+    .header {
+      display: flex;
+      flex-grow: 1;
+      .right {
+        flex: 1;
+      }
+      .left {
+        flex: 1;
+        margin: 5rem auto;
+        p {
+          width: 80%;
+          font-size: 1.4rem;
+        }
+      }
+      img {
+        margin: 4rem auto;
+        width: 25rem;
+      }
+    }
+    .how-to {
+      margin: 5rem auto;
+      img {
+        margin: 0 auto;
+        width: 13rem;
+      }
+      h2 {
+        text-align: center;
+        margin: 3rem auto;
+      }
+      .row1,
+      .row2 {
+        display: flex;
+        justify-content: space-around;
+        .post-your-thought,
+        .discuss,
+        .help,
+        .update,
+        .facebook,
+        .tackle {
+          h3 {
+            text-align: center;
+            margin: 1.5rem;
+          }
+          flex: 1;
+          margin: 2rem 1rem;
+        }
+      }
+    }
+  }
+}
+
 /* homepage Posts page */
 .main-grid {
   display: grid;
@@ -84,81 +156,7 @@ a {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    .post-item {
-      display: grid;
-      grid-template-columns: 2fr 9fr 2fr;
-      grid-template-areas: 'idea-user idea-content idea-likes';
-      padding: 0.5rem 1rem;
-      border: 1px solid #e8e8e8;
-      &:hover {
-        background-color: lighten($light-color, 5%);
-        cursor: pointer;
-      }
 
-      //   border-collapse: collapse;
-      background-color: white;
-      .left {
-        grid-area: idea-user;
-        .status {
-          font-size: 2rem;
-          border: none;
-          background-color: transparent;
-          .red {
-            color: $danger-color;
-          }
-          .green {
-            color: $success-color;
-          }
-          .yellow {
-            color: #ffcc33;
-          }
-        }
-
-        img {
-          width: 2.5rem;
-        }
-      }
-      .middle {
-        grid-area: idea-content;
-        .border-btn {
-          border: 0.5px solid $light-grey;
-          padding: 0.2rem 0.5rem;
-          margin: 1rem;
-          border-radius: 0.4rem;
-          &:hover {
-            background-color: $light-color;
-          }
-          .fa-comments {
-            color: $grey-color;
-            font-size: 0.8rem;
-          }
-          .comment-count {
-            font-size: 0.8rem;
-          }
-        }
-      }
-      .right {
-        grid-area: idea-likes;
-        .toggle-like {
-          background-color: transparent;
-          color: #333;
-          border: 0.5px solid $light-grey;
-          &:hover {
-            color: $primary-color;
-            border: 0.5px solid $primary-color;
-          }
-        }
-
-        .primary-border {
-          background-color: transparent;
-          color: $primary-color;
-          border: 0.5px solid $primary-color;
-        }
-      }
-      .post-content {
-        margin: 0.5rem;
-      }
-    }
     .post-user {
       text-align: center;
       padding-top: 0.5rem;
@@ -171,6 +169,100 @@ a {
       text-align: center;
       padding: 1rem;
     }
+  }
+}
+// pull this out from the grid so the one in usr profile can use as well
+.post-item {
+  display: grid;
+  grid-template-columns: 2fr 9fr 2fr;
+  grid-template-areas: 'idea-user idea-content idea-likes';
+  padding: 0.5rem 1rem;
+  // border: 1px solid #e8e8e8;
+  &:hover {
+    background-color: lighten($light-color, 5%);
+    cursor: pointer;
+  }
+
+  //   border-collapse: collapse;
+  background-color: white;
+  .left {
+    grid-area: idea-user;
+
+    img {
+      width: 2.5rem;
+    }
+  }
+  .middle {
+    grid-area: idea-content;
+    .border-btn {
+      border: 0.5px solid $light-grey;
+      padding: 0.2rem 0.5rem;
+      margin: 1rem;
+      border-radius: 0.4rem;
+      &:hover {
+        background-color: $light-color;
+      }
+      .fa-comments {
+        color: $grey-color;
+        font-size: 0.8rem;
+      }
+      .comment-count {
+        font-size: 0.8rem;
+      }
+    }
+  }
+  // posts page
+  .right {
+    grid-area: idea-likes;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .toggle-like {
+      background-color: transparent;
+      color: #333;
+      border: 0.5px solid $light-grey;
+      &:hover {
+        color: $primary-color;
+        border: 0.5px solid $primary-color;
+      }
+    }
+
+    .primary-border {
+      background-color: transparent;
+      color: $primary-color;
+      border: 0.5px solid $primary-color;
+    }
+
+    .status {
+      font-size: 1rem;
+      margin-top: 0.5rem;
+      color: $dark-color;
+      border: none;
+      background-color: transparent;
+      cursor: pointer;
+      .status1 {
+        text-align: center;
+        font-size: 0.7rem;
+      }
+
+      .status2 {
+        text-align: center;
+        font-size: 1rem;
+      }
+      .red-status {
+        color: $danger-color;
+      }
+      .green-status {
+        color: $success-color;
+      }
+      .yellow-status {
+        color: rgb(251, 184, 46);
+        font-weight: 700;
+      }
+    }
+  }
+  .post-content {
+    margin: 0.5rem;
   }
 }
 
@@ -231,12 +323,39 @@ a {
       margin: 0 4rem;
       font-size: 0.8rem;
     }
+    .comment-panel {
+      display: flex;
+      margin: 1rem 2rem 1rem;
+      font-weight: 700;
+    }
   }
   .remove-comment {
     position: absolute;
     top: 0rem;
     right: 2rem;
     color: $danger-color;
+  }
+
+  .subcomment-section {
+    margin-left: 2rem;
+    .subcomment-form {
+      margin: 0.5rem;
+      form {
+        display: flex;
+        align-items: flex-start;
+      }
+      textarea {
+        margin: 0 0.5rem 1rem;
+        width: 80%;
+        padding: 0.5rem;
+        font-size: 1rem;
+        border-radius: 0.3rem;
+        border: 1px solid #ccc;
+      }
+      input {
+        // width: 5rem;
+      }
+    }
   }
 }
 .users-grid {
@@ -282,6 +401,7 @@ section.category {
 i.fa-sort-up {
   font-size: 2rem;
   vertical-align: middle;
+  color: $light-grey;
 }
 
 // .idea-form {
@@ -334,6 +454,7 @@ i.fa-sort-up {
       }
     }
   }
+  // single post page
   .right {
     grid-area: right;
     display: flex;
@@ -488,3 +609,90 @@ i.fa-sort-up {
   background-color: $success-color;
   // border: 1px solid $success-color;
 }
+
+// profile section -----------------------------
+.profile-section {
+  margin: 2rem auto;
+  width: 70%;
+  background-color: white;
+  box-shadow: 4px 4px 6px -6px $grey-color;
+  text-align: center;
+  padding: 3rem;
+  .profile-top {
+    img {
+      border-radius: 50%;
+      font-size: 10rem;
+    }
+    .lead-status {
+      font-size: 1.2rem;
+    }
+    a {
+      margin: 0 0.3rem;
+    }
+  }
+  .profile-about {
+    .bio {
+      width: 70%;
+      margin: 0 auto;
+    }
+  }
+}
+
+.look-down {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  width: 2rem;
+  color: $grey-color;
+  .relative {
+    position: relative;
+    top: -1.2rem;
+  }
+}
+.profile-action {
+  display: flex;
+  button,
+  a {
+    font-size: 0.8rem;
+    padding: 0.3rem 1rem;
+  }
+}
+
+.my-post-section {
+  margin: 2rem auto 0;
+  h2 {
+    margin: 1rem;
+  }
+}
+.edit-profile-section {
+  margin: 1rem auto;
+  background-color: white;
+  // box-shadow: 4px 4px 6px -6px $grey-color;
+  padding: 3rem;
+  width: 60%;
+  text-align: center;
+  .form-group {
+    margin: 2rem 0 1rem;
+    p {
+      &.label {
+        font-size: 1.2rem;
+      }
+      &.small {
+        font-size: 0.8rem;
+      }
+    }
+    select,
+    input[type='text'],
+    input[type='email'],
+    input[type='password'],
+    textarea {
+      width: 100%;
+      max-width: 400px;
+      padding: 0.6rem;
+      font-size: 1rem;
+      border-radius: 0.3rem;
+      border: 1px solid #ccc;
+    }
+  }
+}
+// profile section done -----------------------------

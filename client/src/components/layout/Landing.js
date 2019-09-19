@@ -11,7 +11,7 @@ const Landing = ({ isAuthenticated }) => {
     <div className='landing'>
       <div className='dark-overlay'>
         <div className='landing-inner'>
-          <h1 className='x-large'>Welcome to IDEAshare</h1>
+          <p>Welcome to IdeaToShare</p>
           <p className='lead'>Share your ideas and problem with the world</p>
           <div className='buttons'>
             <Link to='/register' className='btn btn-action'>
