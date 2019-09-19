@@ -45,7 +45,10 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
     <nav className='navbar bg-white'>
       <div className='left-nav'>
         <h1>
-          <Link to='/'>IDEATOSHARE</Link>
+          <Link to='/'>
+            <img src='/images/logo.svg' alt='logo' />
+            <h1>IDEATOSHARE</h1>
+          </Link>
         </h1>
 
         <Link to='/about'>About</Link>

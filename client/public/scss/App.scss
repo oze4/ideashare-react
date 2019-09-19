@@ -50,7 +50,18 @@ a {
   .left-nav {
     display: flex;
     justify-content: left;
-    align-items: baseline;
+    a {
+      display: flex;
+      align-items: center;
+      h1 {
+        color: $primary-color;
+        font-size: 1.2rem;
+      }
+      img {
+        width: 2rem;
+        margin-right: 1rem;
+      }
+    }
   }
   ul {
     display: flex;

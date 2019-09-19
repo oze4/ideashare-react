@@ -57,13 +57,22 @@ const Profile = ({
                 <i className='fas fa-chevron-down fa-2x'></i>
                 <i className='fas fa-chevron-down fa-2x relative'></i>
               </div>
-
               <h2>Posts from {profile.user.name}</h2>
-              {posts
-                .filter(post => post.user === profile.user._id)
-                .map(mypost => (
-                  <PostItem key={mypost._id} post={mypost} />
-                ))}
+              {posts.filter(post => post.user === profile.user._id).length >
+              0 ? (
+                <Fragment>
+                  {posts
+                    .filter(post => post.user === profile.user._id)
+                    .map(mypost => (
+                      <PostItem key={mypost._id} post={mypost} />
+                    ))}
+                </Fragment>
+              ) : (
+                <Fragment>
+                  <h3>No post yet</h3>
+                  {/* <Link to='/post-form'>Create a post</Link> */}
+                </Fragment>
+              )}
             </Fragment>
           )}
         </Fragment>
