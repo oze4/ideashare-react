@@ -73,7 +73,11 @@ const CommentItem = ({
 
           <div className='subcomment-items'>
             {subComments.map(subcomment => (
-              <SubCommentItem subcomment={subcomment} postId={postId} />
+              <SubCommentItem
+                commentid={_id}
+                subcomment={subcomment}
+                postId={postId}
+              />
             ))}
           </div>
         </div>

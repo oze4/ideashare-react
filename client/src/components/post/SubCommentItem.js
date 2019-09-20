@@ -10,6 +10,7 @@ const SubCommentItem = ({
   postId,
   subcomment: { _id, text, name, avatar, user, date, likes },
   auth,
+  commentid,
   deleteSubComment
 }) => (
   <div className='subcomment-item'>
@@ -22,24 +23,26 @@ const SubCommentItem = ({
     <div>
       <p className='comment-content'>{text}</p>
 
-      <p class='comment-date'>
-        <Moment format='YYYY/MM/DD'>{date}</Moment>
-      </p>
+      <div className='comment-info'>
+        <p className='comment-date'>
+          <Moment format='YYYY/MM/DD'>{date}</Moment>
+        </p>
+
+        {!auth.loading && auth.isAuthenticated && user === auth.user._id && (
+          <button
+            onClick={e => deleteSubComment(postId, commentid, _id)}
+            type='button'
+            className='remove-sub-comment'
+          >
+            Delete
+          </button>
+        )}
+      </div>
 
       {/* <button onClick={e => toggleCommentLike(postId, _id)}>
       like
       {likes.length}
     </button> */}
-
-      {/* {!auth.loading && auth.isAuthenticated && user === auth.user._id && (
-      <button
-        onClick={e => deleteSubComment(postId, comment_id, subcomment_id)}
-        type='button'
-        className='remove-comment'
-      >
-        Delete
-      </button>
-    )} */}
     </div>
   </div>
 );

@@ -29,26 +29,30 @@ const UserItem = ({ user: { users, loading }, getUsers }) => {
       {loading || users === null ? (
         <Spinner />
       ) : (
-        <div className='users-grid'>
+        <Fragment>
           <p className='lead'>
             <i className='fab fa-connectdevelop' /> Our Ideators Today
           </p>
           <div className='users'>
             <div className='flex'>
               {users.length > 0 ? (
-                shuffleWords(users).map(user => (
-                  <div key={user._id}>
-                    <Link to={`/profile/${user._id}`}>
-                      <img className='user-avatar' src={user.avatar} />
-                    </Link>
-                  </div>
-                ))
+                shuffleWords(users)
+                  .slice(0, 10)
+                  .map(user => (
+                    <div key={user._id}>
+                      <Link to={`/profile/${user._id}`}>
+                        <img className='user-avatar' src={user.avatar} />
+                      </Link>
+                    </div>
+                  ))
               ) : (
                 <h4>No profiles found ...</h4>
               )}
             </div>
+            <hr />
+            <Link to='/post-form'>Join them</Link>
           </div>
-        </div>
+        </Fragment>
       )}
     </Fragment>
   );

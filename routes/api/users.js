@@ -58,7 +58,7 @@ router.post(
         s: '200',
         r: 'pg',
         d: 'mm',
-        protocol: 'http'
+        protocol: 'https'
       });
       user = new User({
         name,

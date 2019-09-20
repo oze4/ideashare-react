@@ -19,14 +19,18 @@ const PostForm = ({ post: { post }, addPost, alert, history }) => {
           setFormData('');
         }}
       >
+        <textarea placeholder='i'>hi</textarea>
+        <textarea className='shit' placeholder='i'>
+          hi
+        </textarea>
         <textarea
           name='title'
-          rows='3'
+          // rows='1'
           placeholder='What is the idea, problem you have?'
           value={formData.title}
           onChange={e => setFormData({ ...formData, title: e.target.value })}
           required
-        />
+        ></textarea>
         <textarea
           name='body'
           rows='5'
@@ -34,7 +38,7 @@ const PostForm = ({ post: { post }, addPost, alert, history }) => {
           value={formData.body}
           onChange={e => setFormData({ ...formData, body: e.target.value })}
           required
-        />
+        ></textarea>
         <input type='submit' className='btn btn-primary m-2' value='Submit' />
       </form>
     </div>

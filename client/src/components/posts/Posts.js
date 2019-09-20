@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import Spinner from '../layout/Spinner';
 import PostItem from './PostItem';
 import UserItem from '../users/UserItem';
+import TopDiscussion from '../TopDiscussion';
 import { getPosts } from '../../actions/post';
 
 const Posts = ({ getPosts, post: { posts, loading } }) => {
@@ -30,8 +31,10 @@ const Posts = ({ getPosts, post: { posts, loading } }) => {
             ))}
         </div>
       </div>
-
-      <UserItem />
+      <div className='right-panel-grid'>
+        <UserItem />
+        <TopDiscussion posts={posts} />
+      </div>
     </div>
   );
 };

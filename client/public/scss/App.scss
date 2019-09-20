@@ -330,12 +330,19 @@ a {
         color: $grey-color;
       }
     }
+
     .comment-content {
       margin: 0 4rem;
     }
+    .comment-info {
+      display: flex;
+    }
     .comment-date {
-      margin: 0 4rem;
+      margin: 0 1rem 0 4rem;
       font-size: 0.8rem;
+    }
+    .remove-sub-comment {
+      color: $danger-color;
     }
     .comment-panel {
       display: flex;
@@ -372,11 +379,26 @@ a {
     }
   }
 }
-.users-grid {
+.right-panel-grid {
   grid-area: users-grid;
   .users {
     background-color: #fff;
     padding: 1.4rem;
+    text-align: center;
+    margin-bottom: 1rem;
+    hr {
+      border: 0;
+      border-top: 1px solid $light-grey;
+      position: relative;
+      width: 18rem;
+      margin: 1rem auto;
+    }
+    a {
+      color: $primary-color;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
 
     .user-avatar {
       width: 3rem;
@@ -384,13 +406,48 @@ a {
       margin: 0.2rem;
     }
   }
-}
 
-hr {
-  background-color: $dark-color;
-  position: relative;
-  width: 18rem;
-  margin: 0 auto;
+  // top discussion
+  .top-discussion-section {
+    background-color: white;
+    padding: 1.2rem;
+    p {
+      font-size: 0.9rem;
+      // font-weight: 600;
+    }
+    .item {
+      padding-bottom: 1rem;
+      hr {
+        border: 0;
+        border-top: 1px solid $light-grey;
+        position: relative;
+        width: 18rem;
+        margin: 0.5rem auto;
+      }
+    }
+    .stats {
+      display: flex;
+      align-items: baseline;
+      color: $grey-color;
+      font-size: 0.8rem;
+      .comments {
+        margin-right: 1rem;
+        // border: 0.5px solid $light-grey;
+        // padding: 0 0.3rem;
+        // border-radius: 0.4rem;
+        i {
+          font-size: 0.8rem;
+          margin-right: 0.2rem;
+        }
+      }
+      .likes {
+        i {
+          font-size: 1.2rem;
+          margin-right: 0.2rem;
+        }
+      }
+    }
+  }
 }
 
 section.category {

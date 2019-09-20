@@ -1,16 +1,15 @@
-var tx = document.getElementsByClassName('comment-area-responsive');
-
-for (var i = 0; i < tx.length + 1; i++) {
-  //   alert(i);
-  tx[i].setAttribute(
+const textarea = document.getElementsByTagName('textarea');
+// alert(textarea.length);
+for (var i = 0; i < textarea.length; i++) {
+  // alert(textarea[0]);
+  textarea[i].setAttribute(
     'style',
-    'height:' + tx[i].scrollHeight + 'px;overflow-y:hidden;'
+    'height:' + textarea[i].scrollHeight + 'px;overflow-y:hidden;'
   );
-  tx[i].addEventListener('change', OnInput, false);
+  textarea[i].addEventListener('input', OnInput, false);
 }
 
 function OnInput() {
   this.style.height = 'auto';
-  alert('hi2');
   this.style.height = this.scrollHeight + 'px';
 }
