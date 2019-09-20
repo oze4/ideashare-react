@@ -7,6 +7,16 @@ import { addComment } from '../../actions/post';
 const CommentForm = ({ auth, postId, addComment }) => {
   const [text, setText] = useState('');
 
+  const setArea = () => {
+    var tx = document.getElementsByTagName('textarea');
+    for (var i = 0; i < tx.length; i++) {
+      tx[i].setAttribute(
+        'style',
+        'height:' + tx[i].scrollHeight + 'px;overflow-y:hidden;'
+      );
+    }
+  };
+
   return (
     <div className='comment-form'>
       <form
@@ -24,10 +34,13 @@ const CommentForm = ({ auth, postId, addComment }) => {
             <textarea
               className='comment-area-responsive'
               name='title'
-              // rows='1'
+              rows='1'
               placeholder='What do you think?'
               value={text}
-              onChange={e => setText(e.target.value)}
+              onChange={e => {
+                setText(e.target.value);
+                setArea(e.target.value);
+              }}
               required
             />
             <input type='submit' className='btn btn-primary' value='Comment' />

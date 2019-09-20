@@ -5,6 +5,15 @@ import { connect } from 'react-redux';
 
 const SubCommentForm = ({ addSubComment, postId, commentId }) => {
   const [text, setSubcomment] = useState('');
+  const setArea = () => {
+    var tx = document.getElementsByTagName('textarea');
+    for (var i = 0; i < tx.length; i++) {
+      tx[i].setAttribute(
+        'style',
+        'height:' + tx[i].scrollHeight + 'px;overflow-y:hidden;'
+      );
+    }
+  };
 
   return (
     <div>
@@ -27,7 +36,10 @@ const SubCommentForm = ({ addSubComment, postId, commentId }) => {
           rows='1'
           placeholder='leave a comment'
           value={text}
-          onChange={e => setSubcomment(e.target.value)}
+          onChange={e => {
+            setSubcomment(e.target.value);
+            setArea(e.target.value);
+          }}
           required
         />
 
