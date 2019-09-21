@@ -14,6 +14,13 @@ const PostSchema = new Schema({
   body: {
     type: String
   },
+  type: {
+    type: String
+  },
+  tags: {
+    // type: [String]
+    type: String
+  },
   name: {
     type: String
   },

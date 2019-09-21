@@ -9,7 +9,19 @@ const PostItem = ({
   deletePost,
   toggleStatus,
   auth,
-  post: { _id, title, name, avatar, user, likes, comments, date, status },
+  post: {
+    _id,
+    title,
+    name,
+    avatar,
+    user,
+    likes,
+    comments,
+    date,
+    status,
+    type,
+    tags
+  },
   history
 }) => {
   let xxx;
@@ -46,7 +58,8 @@ const PostItem = ({
           )}
       </div>
       <Link to={`posts/${_id}`} className='middle'>
-        <p className='my-1 post-item-content'>{title}</p>
+        {type && <span className='post-type'>{type}</span>}
+        <p className='post-item-content'>{title}</p>
         <p className='post-date small'>
           Posted on <Moment format='YYYY/MM/DD'>{date}</Moment>
         </p>
@@ -59,6 +72,8 @@ const PostItem = ({
             </span>
           </Link>
         </span>
+
+        {tags && <span className='post-tags'>{tags}</span>}
       </Link>
 
       <div className='right'>

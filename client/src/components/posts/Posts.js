@@ -34,6 +34,13 @@ const Posts = ({ getPosts, post: { posts, loading } }) => {
       <div className='right-panel-grid'>
         <UserItem />
         <TopDiscussion posts={posts} />
+        <div
+          className='fb-group'
+          data-href='https://www.facebook.com/groups/ideatoshare/'
+          data-width='350'
+          data-show-social-context='true'
+          data-show-metadata='false'
+        ></div>
       </div>
     </div>
   );

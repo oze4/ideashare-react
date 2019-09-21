@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 const TopDiscussion = ({ posts }) => {
@@ -16,8 +17,8 @@ const TopDiscussion = ({ posts }) => {
           )
           .slice(0, 10)
           .map(post => (
-            <div className='item'>
-              <p>{post.title}</p>
+            <div className={`item ${post.status}-border`}>
+              <Link to={`/posts/${post._id}`}>{post.title}</Link>
 
               <div className='stats'>
                 <div className='comments'>
@@ -29,8 +30,6 @@ const TopDiscussion = ({ posts }) => {
                   {post.likes.length}
                 </div>
               </div>
-
-              <hr />
             </div>
           ))}
       </div>
