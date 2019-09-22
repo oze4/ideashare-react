@@ -14,6 +14,8 @@ import Profile from './components/profile/Profile';
 import Posts from './components/posts/Posts';
 import Post from './components/post/Post';
 import PostForm from './components/posts/PostForm';
+import Footer from './components/Footer';
+import Contact from './components/Contact';
 import PrivateRoute from './components/routing/PrivateRoute';
 
 // Redux
@@ -56,6 +58,7 @@ const App = () => {
               <Route exact path='/posts/:id' component={Post} />
               <Route exact path='/post-form' component={PostForm} />
               <PrivateRoute exact path='/dashboard' component={Dashboard} />
+              <Route exact path='/contact' component={Contact} />
               <PrivateRoute
                 exact
                 path='/create-profile'
@@ -68,6 +71,8 @@ const App = () => {
               />
             </Switch>
           </section>
+          ,
+          <Footer />
         </Fragment>
       </Router>
     </Provider>

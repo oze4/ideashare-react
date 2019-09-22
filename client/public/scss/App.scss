@@ -97,7 +97,7 @@ a {
 
 .about-section {
   background-color: white;
-  margin: 5rem auto 3rem;
+  margin: 4rem auto 0;
   .container {
     width: 90%;
 
@@ -109,7 +109,7 @@ a {
       }
       .left {
         flex: 1;
-        margin: 5rem auto;
+        margin: 12rem auto 10rem;
         p {
           width: 80%;
           font-size: 1.4rem;
@@ -117,11 +117,25 @@ a {
       }
       img {
         margin: 4rem auto;
-        width: 25rem;
+        width: 35rem;
+      }
+    }
+
+    .for-you {
+      margin: 4rem auto;
+      h2 {
+        text-align: center;
+      }
+      ul {
+        margin: 2rem auto;
+        width: 50%;
+        min-width: 35rem;
+        font-size: 1.3rem;
       }
     }
     .how-to {
       margin: 5rem auto;
+      font-size: 1.2rem;
       img {
         margin: 0 auto;
         width: 13rem;
@@ -397,6 +411,11 @@ a {
 }
 .right-panel-grid {
   grid-area: users-grid;
+  .small-about {
+    background-color: #fff;
+    padding: 1.4rem;
+    margin: 3.4rem auto 1rem;
+  }
   .users {
     background-color: #fff;
     padding: 1.4rem;
@@ -536,6 +555,22 @@ i.fa-sort-up {
     }
     .post-content {
       margin: 0 6rem;
+
+      .post-type {
+        font-size: 0.8rem;
+        background-color: $primary-color;
+        color: white;
+        padding: 0.2rem 0.5rem;
+        border-radius: 0.3rem;
+      }
+      .post-tags {
+        margin-left: 0.5rem;
+        font-size: 0.9rem;
+        &:hover {
+          // text-decoration: underline;
+        }
+      }
+
       .post-body {
         font-family: 'Lora', serif;
         font-weight: 500;
@@ -743,17 +778,6 @@ i.fa-sort-up {
   }
 }
 
-.look-down {
-  display: flex;
-  flex-direction: column;
-  margin: 0 auto;
-  width: 2rem;
-  color: $grey-color;
-  .relative {
-    position: relative;
-    top: -1.2rem;
-  }
-}
 .profile-action {
   display: flex;
   button,
@@ -801,3 +825,95 @@ i.fa-sort-up {
   }
 }
 // profile section done -----------------------------
+
+//Footer computer
+.footer {
+  font-size: 1rem;
+  padding: 2rem;
+  margin-top: 8rem;
+  .content {
+    width: 80%;
+    max-width: 700px;
+    margin: auto;
+    .link {
+      display: flex;
+      justify-content: space-around;
+      margin: 0 auto;
+    }
+    #copyright {
+      text-align: center;
+    }
+  }
+}
+
+//contact
+.contact {
+  width: 80%;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+//mobile
+@media screen and (min-width: 700px) {
+  // Footer
+  .footer {
+    background-color: $dark-color;
+    color: #fff;
+    font-size: 0.8rem;
+    .content {
+      padding: 1rem;
+      .logo {
+        color: $primary-color;
+        text-align: center;
+      }
+      * {
+        color: $light-color;
+        text-decoration: none;
+        margin: 0.5rem;
+        display: block;
+      }
+      #copyright {
+        font-size: 0.7rem;
+        color: $light-grey;
+      }
+    }
+  }
+
+  .contact {
+    h1,
+    .lead {
+      text-align: center;
+    }
+    .content {
+      width: 80%;
+      margin: 3rem auto;
+    }
+    .label {
+      margin: 2rem 1.5rem 0;
+    }
+    input[type='email'],
+    input[type='text'] {
+      display: block;
+      margin: 0 auto;
+      width: 80%;
+      padding: 0.6rem;
+      font-size: 1rem;
+      margin-bottom: 1rem;
+      border: none;
+      border-bottom: solid 1px $primary-color;
+    }
+    textarea {
+      display: block;
+      margin: 1rem auto;
+      width: 100%;
+      padding: 0.6rem;
+      font-size: 1rem;
+      margin-bottom: 1rem;
+      border: solid 1px $primary-color;
+    }
+    .btn {
+      margin-top: 2rem;
+      width: 100%;
+    }
+  }
+}

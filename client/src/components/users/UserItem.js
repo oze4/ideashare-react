@@ -30,9 +30,9 @@ const UserItem = ({ user: { users, loading }, getUsers }) => {
         <Spinner />
       ) : (
         <Fragment>
-          <p className='lead'>
+          <h2>
             <i className='fab fa-connectdevelop' /> Our Ideators Today
-          </p>
+          </h2>
           <div className='users'>
             <div className='flex'>
               {users.length > 0 ? (

@@ -6,7 +6,7 @@ const About = () => {
       <div className='container'>
         <div className='header'>
           <div className='left'>
-            <h1>what is IdeaToShare</h1>
+            <h1>What is IDEATOSHARE</h1>
             <p>
               IdeaToshare is a community of changemakers, creators, developers
               or anyone where individuals can share their thoughts about the
@@ -19,6 +19,21 @@ const About = () => {
           </div>
         </div>
 
+        <div className='look-down'>
+          <i className='fas fa-chevron-down fa-2x'></i>
+          <i className='fas fa-chevron-down fa-2x relative'></i>
+        </div>
+
+        <div className='for-you'>
+          <h2>Is IDEATOSHARE right for you?</h2>
+          <ul>
+            <li>Are you a creator who is looking for an idea for a project?</li>
+            <li>Do you have ideas and look for someone to join your team?</li>
+            <li>
+              Do you just want to see a better world and share your ideas?
+            </li>
+          </ul>
+        </div>
         <div className='how-to'>
           <h2>How does it work</h2>
           <div className='row1'>

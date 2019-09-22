@@ -41,6 +41,7 @@ const Post = ({
           </Link>
 
           <div className='post-content'>
+            {post.type && <span className='post-type'>{post.type}</span>}
             <h1 className='post-title'>{post.title}</h1>
             <p className='post-body'>{post.body}</p>
             <p className='post-date'>
@@ -65,6 +66,7 @@ const Post = ({
                   Delete this post
                 </button>
               )}
+            {post.tags && <span className='post-tags'>{post.tags}</span>}
           </div>
         </div>
 

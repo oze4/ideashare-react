@@ -5,6 +5,7 @@ import Spinner from '../layout/Spinner';
 import PostItem from './PostItem';
 import UserItem from '../users/UserItem';
 import TopDiscussion from '../TopDiscussion';
+import SmallAbout from '../SmallAbout';
 import { getPosts } from '../../actions/post';
 
 const Posts = ({ getPosts, post: { posts, loading } }) => {
@@ -32,6 +33,7 @@ const Posts = ({ getPosts, post: { posts, loading } }) => {
         </div>
       </div>
       <div className='right-panel-grid'>
+        <SmallAbout />
         <UserItem />
         <TopDiscussion posts={posts} />
         <div
