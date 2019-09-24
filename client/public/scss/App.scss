@@ -1,4 +1,4 @@
-@import 'config';
+.@import 'config';
 @import 'utilities';
 @import 'hamburgers';
 
@@ -236,7 +236,7 @@ a {
       border-radius: 0.3rem;
     }
     .post-item-content {
-      font-size: 1.3rem;
+      font-size: 1.1rem;
       margin: 0.5rem auto;
     }
     .border-btn {
@@ -797,6 +797,9 @@ i.fa-sort-up {
   }
 }
 
+.noti-button{
+  border:none;
+}
 .my-post-section {
   margin: 2rem auto 0;
   h2 {
@@ -875,7 +878,7 @@ i.fa-sort-up {
 }
 
 //mobile
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 800px) {
   // Navbar
   .navbar {
     z-index: 2;

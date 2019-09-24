@@ -19,7 +19,7 @@ const NotificationIcon = ({
           <i className='far fa-bell font-size-1 mx-1'></i>
         </Link>
       ) : (
-        <button onClick={e => seeNotification()}>
+        <button className='noti-button' onClick={e => seeNotification()}>
           <Link to='/dashboard'>
             <i className='fas fa-bell text-primary font-size-1 mx-1'></i>
           </Link>
