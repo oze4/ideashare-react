@@ -41,7 +41,7 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
             <input
               name='name'
               type='text'
-              placeholder='Name'
+              // placeholder='Name'
               requried
               value={name}
               onChange={e => onChange(e)}
@@ -53,7 +53,7 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
             <input
               name='email'
               type='email'
-              placeholder='E-mail'
+              // placeholder='E-mail'
               value={email}
               onChange={e => onChange(e)}
             />
@@ -64,7 +64,7 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
             <input
               name='password'
               type='password'
-              placeholder='Password'
+              // placeholder='Password'
               minLength='6'
               value={password}
               onChange={e => onChange(e)}
@@ -76,7 +76,7 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
             <input
               name='password2'
               type='password'
-              placeholder='Confirm Password'
+              // placeholder='Confirm Password'
               minLength='6'
               value={password2}
               onChange={e => onChange(e)}

@@ -1,10 +1,10 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Moment from 'react-moment';
 import { deleteSubComment, toggleCommentLike } from '../../actions/post';
-import Spinner from '../layout/Spinner';
+// import Spinner from '../layout/Spinner';
 
 const SubCommentItem = ({
   postId,

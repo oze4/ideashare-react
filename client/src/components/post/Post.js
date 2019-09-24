@@ -7,7 +7,6 @@ import { Link, withRouter } from 'react-router-dom';
 import Moment from 'react-moment';
 import CommentForm from './CommentForm';
 import CommentItem from './CommentItem';
-import SubCommentForm from './SubCommentForm';
 import { deletePost, toggleLikePostPage } from '../../actions/post';
 
 const Post = ({
@@ -29,7 +28,7 @@ const Post = ({
     <Spinner />
   ) : (
     <Fragment>
-      <Link to='/posts' className='btn'>
+      <Link to='/' className='btn'>
         Back to posts
       </Link>
 
@@ -62,6 +61,7 @@ const Post = ({
                 <button
                   onClick={e => deletePost(post._id, history)}
                   type='button'
+                  className='delete'
                 >
                   Delete this post
                 </button>
@@ -102,7 +102,7 @@ const Post = ({
 
       <h2>Discussion</h2>
       <div className='discussion-section'>
-        <CommentForm postId={post._id} />
+        <CommentForm postId={post._id} userId={post.user} />
         <div className='comments'>
           {post.comments
             .sort((a, b) =>

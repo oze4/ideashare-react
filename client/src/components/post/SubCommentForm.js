@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { addSubComment, removeSubComment } from '../../actions/post';
+import { addSubComment } from '../../actions/post';
 import { connect } from 'react-redux';
 
 const SubCommentForm = ({ addSubComment, postId, commentId }) => {
@@ -49,7 +49,9 @@ const SubCommentForm = ({ addSubComment, postId, commentId }) => {
   );
 };
 
-SubCommentForm.propTypes = {};
+SubCommentForm.propTypes = {
+  addSubComment: PropTypes.func.isRequired
+};
 
 export default connect(
   null,

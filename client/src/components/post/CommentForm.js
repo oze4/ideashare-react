@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { addComment } from '../../actions/post';
 
-const CommentForm = ({ auth, postId, addComment }) => {
+const CommentForm = ({ auth, postId, userId, addComment }) => {
   const [text, setText] = useState('');
 
   const setArea = () => {
@@ -24,7 +24,7 @@ const CommentForm = ({ auth, postId, addComment }) => {
         onSubmit={e => {
           e.preventDefault();
           //   text is object
-          addComment(postId, { text });
+          addComment(postId, userId, { text });
           setText('');
         }}
       >

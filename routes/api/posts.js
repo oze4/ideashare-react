@@ -49,6 +49,37 @@ router.post(
 );
 
 // @ route    GET api/posts
+// @desc      Get current date  posts
+// @access    Public
+router.get('/today', async (req, res) => {
+  try {
+    //no need to populate because the name and avatar are already in the post model
+    var now = new Date();
+    var startOfToday = new Date(
+      now.getFullYear(),
+      now.getMonth(),
+      now.getDate()
+    );
+
+    const posts = await Post.find({ date: { $gte: startOfToday } }).sort({
+      date: -1
+    });
+    if (now > posts[0].date) {
+      console.log('now');
+      console.log(now);
+    } else {
+      console.log('yeah');
+    }
+    console.log('post data');
+    console.log(posts[0].date);
+    res.json(posts);
+  } catch (err) {
+    console.error(err.message);
+    res.send(500).send('Server Error');
+  }
+});
+
+// @ route    GET api/posts
 // @desc      Get all posts
 // @access    Public
 router.get('/', async (req, res) => {
@@ -65,16 +96,16 @@ router.get('/', async (req, res) => {
 // @ route    GET api/posts
 // @desc      Get all posts of a single user to show in dashboard
 // @access    Public
-// router.get('/mypost', auth, async (req, res) => {
-//   try {
-//     //no need to populate because the name and avatar are already in the post model
-//     const posts = await Post.find({ user: req.user.id }).sort({ date: -1 });
-//     res.json(posts);
-//   } catch (err) {
-//     console.error(err.message);
-//     res.send(500).send('Server Error');
-//   }
-// });
+router.get('/mypost', auth, async (req, res) => {
+  try {
+    //no need to populate because the name and avatar are already in the post model
+    const posts = await Post.find({ user: req.user.id }).sort({ date: -1 });
+    res.json(posts);
+  } catch (err) {
+    console.error(err.message);
+    res.send(500).send('Server Error');
+  }
+});
 
 // @ route    GET api/posts/:post_id
 // @desc      Get a single post by ID

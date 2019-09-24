@@ -4,11 +4,13 @@ import auth from './auth';
 import profile from './profile';
 import post from './post';
 import user from './user';
+import notification from './notification';
 
 export default combineReducers({
   alert,
   auth,
   profile,
   post,
-  user
+  user,
+  notification
 });

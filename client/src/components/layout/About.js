@@ -1,6 +1,7 @@
 import React from 'react';
-
+import { useMediaPredicate } from 'react-media-hook';
 const About = () => {
+  const biggerThan700 = useMediaPredicate('(min-width: 700px)');
   return (
     <div className='about-section'>
       <div className='container'>
@@ -14,25 +15,30 @@ const About = () => {
               world. Share, discuss, create !!!
             </p>
           </div>
-          <div className='right'>
-            <img src='images/community.svg' alt='community' />
-          </div>
-        </div>
 
-        <div className='look-down'>
-          <i className='fas fa-chevron-down fa-2x'></i>
-          <i className='fas fa-chevron-down fa-2x relative'></i>
+          {biggerThan700 && (
+            <div className='right'>
+              <img src='images/community.svg' alt='community' />
+            </div>
+          )}
         </div>
+        {biggerThan700 && (
+          <div className='look-down'>
+            <i className='fas fa-chevron-down fa-2x'></i>
+            <i className='fas fa-chevron-down fa-2x relative'></i>
+          </div>
+        )}
 
         <div className='for-you'>
           <h2>Is IDEATOSHARE right for you?</h2>
-          <ul>
-            <li>Are you a creator who is looking for an idea for a project?</li>
-            <li>Do you have ideas and look for someone to join your team?</li>
-            <li>
-              Do you just want to see a better world and share your ideas?
-            </li>
-          </ul>
+
+          <div>
+            <p>• Are you a creator who is looking for an idea for a project?</p>
+            <p>• Do you have ideas and look for someone to join your team?</p>
+            <p>
+              • Do you just want to see a better world and share your ideas?
+            </p>
+          </div>
         </div>
         <div className='how-to'>
           <h2>How does it work</h2>

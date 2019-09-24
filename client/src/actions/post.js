@@ -32,6 +32,37 @@ export const getPosts = () => async dispatch => {
     });
   }
 };
+//GetTodayPost
+export const getTodayPosts = () => async dispatch => {
+  try {
+    const res = await axios.get('/api/posts/today');
+    dispatch({
+      type: GET_POSTS,
+      payload: res.data
+    });
+  } catch (err) {
+    dispatch({
+      type: POST_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status }
+    });
+  }
+};
+
+//GetTodayPost
+export const getYesterdayPosts = () => async dispatch => {
+  try {
+    const res = await axios.get('/api/posts/today');
+    dispatch({
+      type: GET_POSTS,
+      payload: res.data
+    });
+  } catch (err) {
+    dispatch({
+      type: POST_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status }
+    });
+  }
+};
 
 // Get a single post
 export const getPost = id => async dispatch => {
@@ -191,7 +222,7 @@ export const addPost = (formData, history) => async dispatch => {
 };
 
 // add comment
-export const addComment = (postId, formData) => async dispatch => {
+export const addComment = (postId, userId, formData) => async dispatch => {
   const config = {
     headers: {
       'Content-Type': 'application/json'
@@ -203,6 +234,7 @@ export const addComment = (postId, formData) => async dispatch => {
       formData,
       config
     );
+    axios.post(`/api/notification/unsee/${userId}`);
     dispatch({
       type: ADD_COMMENT,
       payload: res.data
@@ -251,7 +283,7 @@ export const addSubComment = (
 // Delete Comment
 export const deleteComment = (postId, commentId) => async dispatch => {
   try {
-    const res = await axios.delete(`/api/posts/comment/${postId}/${commentId}`);
+    await axios.delete(`/api/posts/comment/${postId}/${commentId}`);
     dispatch({
       type: REMOVE_COMMENT,
       payload: commentId

@@ -41,7 +41,11 @@ const UserItem = ({ user: { users, loading }, getUsers }) => {
                   .map(user => (
                     <div key={user._id}>
                       <Link to={`/profile/${user._id}`}>
-                        <img className='user-avatar' src={user.avatar} />
+                        <img
+                          className='user-avatar'
+                          src={user.avatar}
+                          alt='user-avatar'
+                        />
                       </Link>
                     </div>
                   ))
