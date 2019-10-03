@@ -1,7 +1,7 @@
 import React from 'react';
 import spinner from './spinner.gif';
 
-export default () => (
+const Spinner = () => (
   <div className='container-xy'>
     <div className='center-xy'>
       <img
@@ -13,3 +13,5 @@ export default () => (
     </div>
   </div>
 );
+
+export default Spinner;
