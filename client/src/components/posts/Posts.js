@@ -17,10 +17,6 @@ const constants = {
     textAlign: "center",
     fontSize: "48px",
     color: "red"
-  },
-  POSTS_CONTAINER_STYLE: {
-    maxHeight: '50vh',
-    overflowY: 'scroll'
   }
 }
 
@@ -61,32 +57,30 @@ const Posts = ({ getPosts, getTodayPosts, post: { posts, loading } }) => {
           {startOfToday < posts[0].date && <h1>true!</h1>}
           <h1>{posts[0].title}</h1>
           <Moment format='YYYY/MM/DD'>{posts[0].date}</Moment> */}
-            <div style={constants.POSTS_CONTAINER_STYLE}>
-              <InfiniteScroll
-                pageStart={0}
-                loadMore={loadMorePosts}
-                hasMore={posts.length > shownPosts.length}
-                loader={<div style={constants.LOADING_STYLE}>Loading...</div>}
-                useWindow={false}
-              >
-                {shownPosts && shownPosts
-                  .filter(post => post.date < startOfToday)
-                  .map(post => (
-                    <h1>hi</h1>
-                  ))}
-                {shownPosts && shownPosts
-                  .sort((a, b) =>
-                    a.likes.length > b.likes.length
-                      ? -1
-                      : b.likes.length > a.likes.length
-                        ? 1
-                        : 0
-                  )
-                  .map(post => (
-                    <PostItem key={post._id} post={post} />
-                  ))}
-              </InfiniteScroll>
-            </div>
+            <InfiniteScroll
+              pageStart={0}
+              loadMore={loadMorePosts}
+              hasMore={posts.length > shownPosts.length}
+              loader={<div style={constants.LOADING_STYLE}>Loading...</div>}
+              useWindow={true}
+            >
+              {shownPosts && shownPosts
+                .filter(post => post.date < startOfToday)
+                .map(post => (
+                  <h1>hi</h1>
+                ))}
+              {shownPosts && shownPosts
+                .sort((a, b) =>
+                  a.likes.length > b.likes.length
+                    ? -1
+                    : b.likes.length > a.likes.length
+                      ? 1
+                      : 0
+                )
+                .map(post => (
+                  <PostItem key={post._id} post={post} />
+                ))}
+            </InfiniteScroll>
           </div>
         </div>
         <div className='right-panel-grid'>
